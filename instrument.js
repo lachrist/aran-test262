@@ -5,6 +5,7 @@ const Fs = require("fs");
 const Acorn = require("acorn");
 const Astring = require("astring");
 const Aran = require("../aran/lib/index.js");
+const Check = require("./check.js");
 
 let aran = null;
 let pointcut = null;
@@ -34,6 +35,7 @@ exports.reset = (setup) => {
 
 exports.instrument = (code, serial) => {
   let estree = Acorn.parse(code, {ecmaVersion:2020});
+  Check.check(estree);
   estree = aran.weave(estree, pointcut, serial);
   if (serial === null || serial === global.undefined) {
     estree = {

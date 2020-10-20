@@ -2,15 +2,35 @@
 
 const Path = require("path");
 const Fs = require("fs");
+const Util = require("util");
 const Glob = require("glob");
+const Astring = require("astring");
+const Acorn = require("acorn");
+const Minimist = require("minimist");
 
-const Env = require("./env");
+const Env = require("./env.js");
 const Gather = require("./gather.js");
 const Prepare = require("./prepare.js");
 const Run = require("./run.js");
 const Instrument = require("./instrument.js");
-const Astring = require("astring");
-const Acorn = require("acorn");
+const Check = require("./check.js");
+
+const intercepters = new Map([
+  ["engine262", (test) => test],
+  ["acorn-astring", (test) => ({
+    __proto__: test,
+    content: Astring.generate(Acorn.parse(test.content, {ecmaVersion:2020}))
+  })]
+].concat(["empty"].map((name) => [
+  "aran-" + name,
+  (test) => {
+    Instrument.reset(name);
+    return {
+      __proto__: test,
+      content: Instrument.instrument(test.content, null)
+    };
+  }
+])));
 
 const readList = (name) => Fs.readFileSync(Path.join(Env.ENGINE262, "test", "test262", name), "utf8")
   .split("\n")
@@ -20,7 +40,9 @@ const readListPaths = (name) => readList(name)
   .flatMap((line) => Glob.sync(Path.resolve(Env.TEST262, "test", line)))
   .map((path) => Path.relative(Env.TEST262, path));
 
-const slowlist = readListPaths("slowlist");
+const slowlist = readListPaths("slowlist").concat([
+  "test/built-ins/Array/prototype/concat/Array.prototype.concat_large-typed-array.js"
+]);
 const skiplist = readListPaths("skiplist");
 const disabledFeatures = readList("features")
   .filter((line) => line.startsWith("-"))
@@ -37,8 +59,9 @@ const outcome = {
 
 const terminate = (error) => {
   try {
-    console.log(JSON.stringify(outcome, null, 2));
-    if (typeof outcome === "object" && outcome !== null) {
+    // console.log(JSON.stringify(outcome, null, 2));
+    console.log(Util.inspect(outcome, {depth:1/0, colors:true}));
+    if (typeof outcome.phase === "object" && outcome.phase !== null) {
       Fs.writeFileSync(Path.join(__dirname, "last-test-content.js"), outcome.phase.test.content, "utf8");
     }
     if (error === null || error === void 0) {
@@ -57,63 +80,70 @@ const terminate = (error) => {
   }
 };
 
-const intercepters = [
-  ["engine262", (test) => test],
-  ["acorn-astring", (test) => ({
-    __proto__: test,
-    content: Astring.generate(Acorn.parse(test.content, {ecmaVersion:2020}))
-  })]
-].concat(["empty"].map((name) => [
-  "aran-" + name,
-  (test) => {
-    Instrument.reset(name);
-    return {
-      __proto__: test,
-      content: Instrument.instrument(test.content, null)
-    };
-  }
-]));
+const argv = Minimist(process.argv.slice(2));
 
-((async () => {
-  next: for await (const path of Gather(Path.join(Env.TEST262, "test"))) {
-    const specifier = Path.relative(Env.TEST262, path);
-    outcome.current = specifier;
-    outcome.phase = "skipping";
-    if (slowlist.includes(specifier)) {
-      outcome.skipped.set(specifier, "engine262-slow");
-      continue next;
-    }
-    if (skiplist.includes(specifier)) {
-      outcome.skipped.set(specifier, "engine262-skipped");
-      continue next;
-    }
-    const tests = await Prepare(path);
-    if (disabledFeatures.includes(tests[0].attributes.features)) {
-      outcome.skipped.set(specifier, "engine262-disabled");
-      continue next;
-    }
-    if (tests[0].attributes.raw) {
-      outcome.skipped.set(specifier, "aran-raw");
-      continue next;
-    }
-    if (tests[0].attributes.module) {
-      outcome.skipped.set(specifier, "aran-module");
-      continue next;
-    }
-    for (let intercepter of intercepters) {
-      for (let test of tests) {
-        outcome.phase = {intercepter:intercepter[0], test:test};
-        const result = Run(intercepter[1](test), Instrument.instrument);
+const path = "target" in argv ? Path.resolve(argv.target) : Path.join(Env.TEST262, "test");
+
+if (!path.startsWith(Env.TEST262)) {
+  throw new Error("Invalid test home");
+}
+
+const offset = "offset" in argv ? parseInt(argv.offset) : 0;
+
+let counter = 0;
+
+Gather(path, (path) => {
+  counter++;
+  if (counter < offset) {
+    return null;
+  }
+  console.log(counter, path);
+  const specifier = Path.relative(Env.TEST262, path);
+  outcome.current = specifier;
+  outcome.phase = "skipping";
+  if (slowlist.includes(specifier)) {
+    outcome.skipped.set(specifier, "engine262-slow");
+    return null;
+  }
+  if (skiplist.includes(specifier)) {
+    outcome.skipped.set(specifier, "engine262-skipped");
+    return null;
+  }
+  const tests = Prepare(path);
+  if (disabledFeatures.includes(tests[0].attributes.features)) {
+    outcome.skipped.set(specifier, "engine262-disabled");
+    return null;
+  }
+  if (tests[0].attributes.raw) {
+    outcome.skipped.set(specifier, "aran-raw");
+    return null;
+  }
+  if (tests[0].attributes.module) {
+    outcome.skipped.set(specifier, "aran-module");
+    return null;
+  }
+  for (let [name, intercepter] of intercepters.entries()) {
+    for (let test of tests) {
+      outcome.phase = {intercepter:name, test:test};
+      try {
+        const result = Run(intercepter(test), Instrument.instrument);
         if (result.status !== 0) {
-          outcome.failure.set(specifier, [intercepter[0], result]);
-          continue next;
+          outcome.failure.set(specifier, [name, result]);
+          return null;
+        }
+      } catch (error) {
+        if (error instanceof Check.CheckError) {
+          outcome.skipped.set(specifier, "aran-" + error.message);
+          return null;
+        } else {
+          throw error;
         }
       }
     }
-    outcome.success.add(specifier);
   }
+  outcome.success.add(specifier);
   return null;
-}) ()).then(terminate, terminate);
+});
 
 process.on("uncaughtExceptionMonitor", terminate);
 

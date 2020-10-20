@@ -3,11 +3,10 @@
 const Path = require("path");
 const Fs = require("fs");
 const JsYaml = require("js-yaml");
-const Env = require("./env.js");
 
-module.exports = async (path) => {
+module.exports = (path) => {
 
-  const content = await Fs.promises.readFile(path, "utf8");
+  const content = Fs.readFileSync(path, "utf8");
 
   const yamlStart = content.indexOf("/*---") + 5;
 
