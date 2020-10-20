@@ -8,9 +8,9 @@ const Env = require("./env");
 const Gather = require("./gather.js");
 const Prepare = require("./prepare.js");
 const Run = require("./run.js");
-const Acorn = require("acorn");
+const Instrument = require("./instrument.js");
 const Astring = require("astring");
-const Aran = require("../aran/lib/index.js");
+const Acorn = require("acorn");
 
 const readList = (name) => Fs.readFileSync(Path.join(Env.ENGINE262, "test", "test262", name), "utf8")
   .split("\n")
@@ -28,68 +28,57 @@ const disabledFeatures = readList("features")
 
 const outcome = {
   __proto__:null,
+  current: null,
+  phase: null,
   skipped: new Map(),
   failure: new Map(),
   success: new Set()
 };
 
-let pointcut;
-
-let aran;
-
-const instrument = (code, serial) => {
-  const estree1 = Acorn.parse(code, {ecmaVersion:2020});
-  const estree2 = aran.weave(estree1, pointcut, serial);
-  return Astring.generate(estree2);
+const terminate = (error) => {
+  try {
+    console.log(JSON.stringify(outcome, null, 2));
+    if (typeof outcome === "object" && outcome !== null) {
+      Fs.writeFileSync(Path.join(__dirname, "last-test-content.js"), outcome.phase.test.content, "utf8");
+    }
+    if (error === null || error === void 0) {
+      return process.exit(0);
+    }
+    if (error instanceof Error) {
+      process.stderr.write(error.message + "\n" + error.stack + "\n");
+    } else {
+      process.stderr.write(`Unexpected termination value: ${String(error)}`);
+    }
+    return process.exit(1);
+  } catch (error) {
+    process.stderr.write(`Termination error: ${String(error)}`);
+  } finally {
+    process.exit(1);
+  }
 };
-
-const pointcuts = {__proto__:null};
-
-const advices = {__proto__:null};
 
 const intercepters = [
   ["engine262", (test) => test],
   ["acorn-astring", (test) => ({
-    path: test.path,
-    attributes: test.attributes,
+    __proto__: test,
     content: Astring.generate(Acorn.parse(test.content, {ecmaVersion:2020}))
   })]
-].concat(["empty"].map((name) => {
-  pointcuts[name] = global.eval(Fs.readFileSync(Path.join(__dirname, "setup", name + "-pointcut.js"), "utf8"));
-  advices[name] = Acorn.parse(Fs.readFileSync(Path.join(__dirname, "setup", name + "-advice.js"), "utf8").replace(/__ESCAPE__IDENTIFIER__/, () => Env.__ESCAPE__IDENTIFIER__), {ecmaVersion:2020});
-  return [
-    "aran-" + name,
-    (test) => {
-      aran = new Aran();
-      pointcut = pointcuts[name];
-      return {
-        path: test.path,
-        attributes: test.attributes,
-        content: Astring.generate({
-          type: "Program",
-          body: [{
-            type: "ExpressionStatement",
-            expression: {
-              type: "CallExpression",
-              optional: false,
-              callee: {
-                type: "CallExpression",
-                optional: false,
-                callee: aran.weave(Acorn.parse(test.content, {ecmaVersion:2020}), pointcut, null).body[0].expression,
-                arguments: [aran.builtin.estree.body[0].expression]
-              },
-              arguments: [advices[name].body[0].expression]
-            }
-          }]
-        })
-      }
-    }
-  ];
-}));
+].concat(["empty"].map((name) => [
+  "aran-" + name,
+  (test) => {
+    Instrument.reset(name);
+    return {
+      __proto__: test,
+      content: Instrument.instrument(test.content, null)
+    };
+  }
+]));
 
 ((async () => {
   next: for await (const path of Gather(Path.join(Env.TEST262, "test"))) {
     const specifier = Path.relative(Env.TEST262, path);
+    outcome.current = specifier;
+    outcome.phase = "skipping";
     if (slowlist.includes(specifier)) {
       outcome.skipped.set(specifier, "engine262-slow");
       continue next;
@@ -113,7 +102,8 @@ const intercepters = [
     }
     for (let intercepter of intercepters) {
       for (let test of tests) {
-        const result = Run(intercepter[1](test));
+        outcome.phase = {intercepter:intercepter[0], test:test};
+        const result = Run(intercepter[1](test), Instrument.instrument);
         if (result.status !== 0) {
           outcome.failure.set(specifier, [intercepter[0], result]);
           continue next;
@@ -122,13 +112,9 @@ const intercepters = [
     }
     outcome.success.add(specifier);
   }
-}) ()).catch((error) => {
-  console.log(outcome);
-  process.stderr.write(error.message + "\n" + error.stack + "\n");
-  process.exit(1);
-});
+  return null;
+}) ()).then(terminate, terminate);
 
-process.on("SIGINT", () => {
-  console.log(outcome);
-  process.exit(0);
-});
+process.on("uncaughtExceptionMonitor", terminate);
+
+process.on("SIGINT", terminate);

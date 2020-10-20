@@ -1,0 +1,25 @@
+{
+  "name": "aran-test262",
+  "description": "Testing Aran on TEst262 with Engine262",
+  "version": "0.0.0",
+  "author": {
+    "name": "Laurent Christophe",
+    "email": "lachrist@vub.ac.be"
+  },
+  "main": "lib/main.js",
+  "repository": "lachrist/aran",
+  "homepage": "http://github.com/lachrist/aran",
+  "license": "MIT",
+  "keywords": [
+    "JavaScript",
+    "Instrumentation",
+    "Test262",
+    "Engine262"
+  ],
+  "dependencies": {
+    "acorn": "^8.0.4",
+    "astring": "^1.4.3",
+    "glob": "^7.1.6",
+    "js-yaml": "^3.14.0"
+  }
+}

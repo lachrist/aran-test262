@@ -1,1 +1,1 @@
-{eval: $262.__ESCAPE_IDENTIFIER__};
+({eval: $262.__ESCAPE_IDENTIFIER__});

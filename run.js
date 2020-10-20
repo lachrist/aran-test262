@@ -108,7 +108,7 @@ module.exports = (test, escape) => {
         [],
         test262realm.realm,
         test262realm.realm.Intrinsics['%Function.prototype%'],
-        ENGINE262.Value.false));}
+        Engine262.Value.false));}
 
   return test262realm.realm.scope(() => {
 
@@ -186,9 +186,7 @@ module.exports = (test, escape) => {
 
     if (test.attributes.negative)
       return {
-        status: NEGATIVE_FAILURE_STATUS,
-        type: test.attributes.negative.type,
-        phase: test.attributes.negative.phase};
+        status: NEGATIVE_FAILURE_STATUS};
 
     return {status:SUCCESS_STATUS};
 
