@@ -35,16 +35,22 @@ module.exports = (path) => {
     content: `"use strict";\n${content}`
   };
 
-  const tests = [];
+  if (attributes.flags.raw) {
+    return [["raw", normal]];
+  }
 
-  if (attributes.flags.raw || attributes.flags.module || attributes.flags.noStrict) {
-    return [normal];
+  if (attributes.flags.module) {
+    return [["module", normal]];
+  }
+
+  if (attributes.flags.noStrict) {
+    return [["normal", normal]];
   }
 
   if (attributes.strictOnly) {
-    return [strict];
+    return [["strict", strict]];
   }
 
-  return [normal, strict];
+  return [["normal", normal], ["strict", strict]];
 
 };

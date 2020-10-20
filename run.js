@@ -2,28 +2,11 @@
 
 const Path = require("path");
 const Fs = require("fs");
-const Env = require("./env.js")
+const Env = require("./env.js");
+const Status = require("./status.js");
 
 const Engine262 = require(Path.join(Env.ENGINE262, "dist", "engine262.js"));
 const Engine262Test262Realm = require(Path.join(Env.ENGINE262, "bin", "test262_realm.js"));
-
-const SUCCESS_STATUS = 0;
-const INCLUDE_FAILURE_STATUS = 1;
-const PRELUDE_FAILURE_STATUS = 2;
-const CONTENT_FAILURE_STATUS = 3;
-const MISSING_NEGATIVE_STATUS = 4;
-const PENDING_PROMISE_STATUS = 5;
-const ASYNC_PRINT_STATUS = 6;
-const ASYNC_MISSING_STATUS = 7;
-
-// exports.SUCCESS_STATUS = SUCCESS_STATUS;
-// exports.INCLUDE_FAILURE_STATUS = INCLUDE_FAILURE_STATUS;
-// exports.PRELUDE_FAILURE_STATUS = PRELUDE_FAILURE_STATUS;
-// exports.CONTENT_FAILURE_STATUS = CONTENT_FAILURE_STATUS;
-// exports.MISSING_NEGATIVE_STATUS = MISSING_NEGATIVE_STATUS;
-// exports.PENDING_PROMISE_STATUS = PENDING_PROMISE_STATUS;
-// exports.ASYNC_PRINT_STATUS = ASYNC_PRINT_STATUS;
-// exports.ASYNC_MISSING_STATUS = ASYNC_MISSING_STATUS;
 
 const PRELUDE = `\
 var Test262Error = class Test262Error extends Error {};
@@ -122,7 +105,7 @@ module.exports = (test, escape) => {
         {specifier: Path.join(Env.TEST262, "harness", include)});
       if (completion instanceof Engine262.AbruptCompletion)
         return {
-          status: INCLUDE_FAILURE_STATUS,
+          status: Status.INCLUDE_FAILURE,
           completion: Engine262.inspect(completion),
           include: include};}
 
@@ -130,7 +113,7 @@ module.exports = (test, escape) => {
       const completion = test262realm.realm.evaluateScript(PRELUDE);
       if (completion instanceof Engine262.AbruptCompletion)
         return {
-          status: PRELUDE_FAILURE_STATUS,
+          status: Status.PRELUDE_FAILURE,
           completion: Engine262.inspect(completion)};}
 
     let async_result = null;
@@ -138,10 +121,10 @@ module.exports = (test, escape) => {
     if (test.attributes.flags.async)
       test262realm.setPrintHandle((m) => {
         if (m.stringValue && m.stringValue() === "Test262:AsyncTestComplete")
-          async_result = {status:SUCCESS_STATUS};
+          async_result = {status:Status.SUCCESS};
         else
           async_result = {
-            status: ASYNC_PRINT_STATUS,
+            status: Status.ASYNC_PRINT,
             message: m.stringValue ? m.stringValue() : Engine262.inspect(m)};
         test262realm.setPrintHandle(undefined);});
 
@@ -168,27 +151,27 @@ module.exports = (test, escape) => {
           (
             test.attributes.negative &&
             isError(test.attributes.negative.type, completion.Value)) ?
-          {status:SUCCESS_STATUS} :
+          {status:Status.SUCCESS} :
           {
-            status: CONTENT_FAILURE_STATUS,
+            status: Status.CONTENT_FAILURE,
             completion: Engine262.inspect(completion)});}
 
     if (test.attributes.flags.async)
       return (
         async_result === null ?
-        {satus: ASYNC_MISSING_STATUS} :
+        {satus: Status.ASYNC_MISSING} :
         async_result);
 
     if (test262realm.trackedPromises.length > 0)
       return {
-        status: PENDING_PROMISE_STATUS,
+        status: Status.PENDING_PROMISE,
         promise: Engine262.inspect(test262realm.trackedPromises[0])};
 
     if (test.attributes.negative)
       return {
-        status: NEGATIVE_FAILURE_STATUS};
+        status: Status.NEGATIVE_FAILURE};
 
-    return {status:SUCCESS_STATUS};
+    return {status:Status.SUCCESS};
 
   });
 

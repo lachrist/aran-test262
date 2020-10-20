@@ -34,13 +34,13 @@ const Path = require("path");
 //   });
 // };
 
-const readdir = (path, callback) => {
+const readdir = function * (path) {
   if (Fs.lstatSync(path).isDirectory()) {
     for (let filename of Fs.readdirSync(path).sort()) {
-      readdir(Path.join(path, filename), callback);
+      yield* readdir(Path.join(path, filename));
     }
   } else if (/\.js$/.test(path) && !/annexB|intl402|_FIXTURE/.test(path)) {
-    callback(path);
+    yield path;
   }
 };
 

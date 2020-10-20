@@ -4,11 +4,13 @@ const Path = require("path");
 const Fs = require("fs");
 const Util = require("util");
 const Glob = require("glob");
-const Escodegen = require("Escodegen");
+const Escodegen = require("escodegen");
 const Acorn = require("acorn");
+const Chalk = require("chalk");
 const Minimist = require("minimist");
 
 const Env = require("./env.js");
+const Status = require("./status.js");
 const Gather = require("./gather.js");
 const Prepare = require("./prepare.js");
 const Run = require("./run.js");
@@ -50,35 +52,29 @@ const disabledFeatures = readList("features")
 
 const outcome = {
   __proto__:null,
-  current: null,
-  phase: null,
-  skipped: new Map(),
-  failure: new Map(),
-  success: new Set()
+  skipped: [],
+  failure: [],
+  success: []
 };
 
 const terminate = (error) => {
   try {
-    // console.log(JSON.stringify(outcome, null, 2));
-    console.log(Util.inspect(outcome, {depth:1/0, colors:true}));
-    if (typeof outcome.phase === "object" && outcome.phase !== null) {
-      Fs.writeFileSync(Path.join(__dirname, "last-test-content.js"), outcome.phase.test.content, "utf8");
-    }
-    if (error === null || error === void 0) {
+    Fs.writeFileSync(Path.join(__dirname, "outcome.json"), JSON.stringify(outcome, null, 2), "utf8");
+    if (error === null) {
       return process.exit(0);
-    }
-    if (error instanceof Error) {
-      process.stderr.write(error.message + "\n" + error.stack + "\n");
     } else {
-      process.stderr.write(`Unexpected termination value: ${String(error)}`);
+      process.stderr.write(error.message + "\n" + error.stack + "\n");
     }
-    return process.exit(1);
   } catch (error) {
-    process.stderr.write(`Termination error: ${String(error)}`);
+    process.stderr.write("Termination error: " + String(error));
   } finally {
-    process.exit(1);
+    process.exit(error === null ? 0 : 1);
   }
 };
+
+process.on("uncaughtException", terminate);
+
+process.on("SIGINT", () => terminate(null));
 
 const argv = Minimist(process.argv.slice(2));
 
@@ -92,59 +88,71 @@ const offset = "offset" in argv ? parseInt(argv.offset) : 0;
 
 let counter = 0;
 
-Gather(path, (path) => {
+const iterator = Gather(path);
+
+const skip = (specifier, agent, reason) => {
+  process.stdout.write(Chalk[agent === "aran" ? "bgYellow" : "yellow"](` skipped >> ${agent} >> ${reason}`) + "\n");
+  outcome.skipped.push([specifier, agent, reason]);
+  global.setImmediate(loop);
+}
+
+const fail = (specifier, intercepter, mode, result) => {
+  process.stdout.write(Chalk[intercepter.startsWith("aran-") ? "bgRed" : "red"](` failed >> ${intercepter} >> ${mode} >> ${result.status}`) + "\n");
+  outcome.failure.push([specifier, mode, intercepter, result]);
+  global.setImmediate(loop);
+};
+
+const pass = (specifier) => {
+  process.stdout.write(Chalk.green(` passed`) + "\n");
+  outcome.success.push(specifier);
+  global.setImmediate(loop);
+};
+
+const loop = () => {
+  const step = iterator.next();
+  if (step.done) {
+    return null;
+  }
+  const path = step.value;
   counter++;
   if (counter < offset) {
-    return null;
+    return global.setImmediate(loop);
   }
-  console.log(counter, path);
+  process.stdout.write(`${Chalk.blue(counter)} ${path}...`);
   const specifier = Path.relative(Env.TEST262, path);
-  outcome.current = specifier;
-  outcome.phase = "skipping";
   if (slowlist.includes(specifier)) {
-    outcome.skipped.set(specifier, "engine262-slow");
-    return null;
+    return skip(specifier, "engine262", "slow");
   }
   if (skiplist.includes(specifier)) {
-    outcome.skipped.set(specifier, "engine262-skipped");
-    return null;
+    return skip(specifier, "engine262", "skip");
   }
   const tests = Prepare(path);
-  if (disabledFeatures.includes(tests[0].attributes.features)) {
-    outcome.skipped.set(specifier, "engine262-disabled");
-    return null;
+  if (disabledFeatures.includes(tests[0][1].attributes.features)) {
+    return skip(specifier, "engine262", "disabled");
   }
-  if (tests[0].attributes.raw) {
-    outcome.skipped.set(specifier, "aran-raw");
-    return null;
+  if (tests[0][1].attributes.raw) {
+    return skip(specifier, "aran", "raw");
   }
-  if (tests[0].attributes.module) {
-    outcome.skipped.set(specifier, "aran-module");
-    return null;
+  if (tests[0][1].attributes.module) {
+    return skip(specifier, "aran", "module");
   }
   for (let [name, intercepter] of intercepters.entries()) {
-    for (let test of tests) {
-      outcome.phase = {intercepter:name, test:test};
+    for (let [mode, test] of tests) {
       try {
         const result = Run(intercepter(test), Instrument.instrument);
-        if (result.status !== 0) {
-          outcome.failure.set(specifier, [name, result]);
-          return null;
+        if (result.status !== Status.SUCCESS) {
+          return fail(specifier, name, mode, result);
         }
       } catch (error) {
         if (error instanceof Check.CheckError) {
-          outcome.skipped.set(specifier, "aran-" + error.message);
-          return null;
+          return skip(specifier, "aran", error.message);
         } else {
           throw error;
         }
       }
     }
   }
-  outcome.success.add(specifier);
-  return null;
-});
+  return pass(specifier);
+};
 
-process.on("uncaughtExceptionMonitor", terminate);
-
-process.on("SIGINT", terminate);
+global.setImmediate(loop);
