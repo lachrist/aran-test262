@@ -18,7 +18,7 @@
   ],
   "dependencies": {
     "acorn": "^8.0.4",
-    "astring": "^1.4.3",
+    "escodegen": "^2.0.0",
     "glob": "^7.1.6",
     "js-yaml": "^3.14.0",
     "minimist": "^1.2.5"

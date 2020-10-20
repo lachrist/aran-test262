@@ -3,7 +3,7 @@
 const Path = require("path");
 const Fs = require("fs");
 const Acorn = require("acorn");
-const Astring = require("astring");
+const Escodegen = require("escodegen");
 const Aran = require("../aran/lib/index.js");
 const Check = require("./check.js");
 
@@ -56,5 +56,5 @@ exports.instrument = (code, serial) => {
       }]
     };
   }
-  return Astring.generate(estree);
+  return Escodegen.generate(estree);
 };

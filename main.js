@@ -4,7 +4,7 @@ const Path = require("path");
 const Fs = require("fs");
 const Util = require("util");
 const Glob = require("glob");
-const Astring = require("astring");
+const Escodegen = require("Escodegen");
 const Acorn = require("acorn");
 const Minimist = require("minimist");
 
@@ -17,9 +17,9 @@ const Check = require("./check.js");
 
 const intercepters = new Map([
   ["engine262", (test) => test],
-  ["acorn-astring", (test) => ({
+  ["acorn-escodegen", (test) => ({
     __proto__: test,
-    content: Astring.generate(Acorn.parse(test.content, {ecmaVersion:2020}))
+    content: Escodegen.generate(Acorn.parse(test.content, {ecmaVersion:2020}))
   })]
 ].concat(["empty"].map((name) => [
   "aran-" + name,
