@@ -4,23 +4,20 @@ const Path = require("path");
 const Fs = require("fs");
 const Util = require("util");
 const Glob = require("glob");
-const Escodegen = require("escodegen");
-const Acorn = require("acorn");
 const Chalk = require("chalk");
 const Minimist = require("minimist");
 
 const Env = require("./env.js");
-const Status = require("./status.js");
 const Gather = require("./gather.js");
-const Prepare = require("./prepare.js");
+const Agents = require("./agents.js");
+const Parse = require("./parse.js");
 const Run = require("./run.js");
-const Instrument = require("./instrument.js");
-const Check = require("./check.js");
 
 //////////
 // Argv //
 //////////
 
+// node batch --target yo.js --agent aran-empty --mode normal --slow
 const argv = Minimist(process.argv.slice(2));
 
 // if ("reset-done" in argv) {
@@ -77,22 +74,6 @@ process.on("SIGINT", () => terminate(null));
 // Intercepters //
 //////////////////
 
-const intercepters = new Map([
-  ["engine262", (test) => test],
-  ["acorn-escodegen", (test) => ({
-    __proto__: test,
-    content: Escodegen.generate(Acorn.parse(test.content, {ecmaVersion:2020}))
-  })]
-].concat(["empty"].map((name) => [
-  "aran-" + name,
-  (test) => {
-    Instrument.reset(name);
-    return {
-      __proto__: test,
-      content: Instrument.instrument(test.content, "script")
-    };
-  }
-])).filter(([name, closure]) => !("intercepter" in argv) || name === argv.intercepter));
 
 ///////////
 // Lists //
@@ -106,8 +87,8 @@ const engine262_slow_list = new Set(read_list_path(Path.join(Env.ENGINE262, "tes
 const engine262_skip_list = new Set(read_list_path(Path.join(Env.ENGINE262, "test", "test262", "skiplist")));
 const engine262_disabled_feature_list = new Set(read_list(Path.join(Env.ENGINE262, "test", "test262", "features")).filter((line) => line.startsWith("-")).map((line) => line.substring(1)));
 
-const aran_skip_list = new Set(read_list_path(Path.join(__dirname, "skip-list.txt")));
-const aran_disabled_feature_list = new Set(read_list_path(Path.join(__dirname, "disabled-feature-list.txt")));
+const aran_skip_list = new Set(read_list_path(Path.join(__dirname, "skiplist.txt")));
+const aran_disabled_feature_list = new Set(read_list_path(Path.join(__dirname, "disabled-features.txt")));
 
 const is_aran_disabled_feature = (feature) => aran_disabled_feature_list.has(feature);
 const is_engine262_disabled_feature = (feature) => engine262_disabled_feature_list.has(feature);
@@ -155,7 +136,7 @@ const loop = () => {
   if (database.has(specifier) && database.get(specifier) === null) {
     return done(specifier);
   }
-  if (engine262_slow_list.has(specifier)) {
+  if (engine262_slow_list.has(specifier) && !argv.slow) {
     return skip(specifier, "engine262", "slow");
   }
   if (engine262_skip_list.has(specifier)) {
@@ -164,37 +145,34 @@ const loop = () => {
   if (aran_skip_list.has(specifier)) {
     return skip(specifier, "aran", "skip");
   }
-  const tests = Prepare(step.value);
-  if ("features" in tests[0][1].attributes) {
-    if (tests[0][1].attributes.features.some(is_engine262_disabled_feature)) {
+  const tests = Parse(step.value);
+  if ("features" in tests[0].attributes) {
+    if (tests[0].attributes.features.some(is_engine262_disabled_feature)) {
       return skip(specifier, "engine262", "disabled-feature");
     }
-    if (tests[0][1].attributes.features.some(is_engine262_disabled_feature)) {
+    if (tests[0].attributes.features.some(is_aran_disabled_feature)) {
       return skip(specifier, "aran", "disabled-feature");
     }
   }
-  if (tests[0][1].attributes.raw) {
+  if (tests[0].attributes.raw) {
     return skip(specifier, "aran", "raw");
   }
   // if (tests[0][1].attributes.module) {
   //   return skip(specifier, "aran", "module");
   // }
-  for (let [name, closure] of intercepters.entries()) {
-    for (let [mode, test] of tests) {
-      if (!("mode" in argv) || mode === argv.mode) {
-        Check.reason = null;
+  for (let [name, agent] of Agents.entries()) {
+    for (let test of tests) {
+      if (!("mode" in argv) || test.mode === argv.mode) {
         try {
-          const result = Run(closure(test), Instrument.instrument);
+          const result = Run(agent(test));
           if (result !== null) {
-            return fail(specifier, name, mode, result);
+            return fail(specifier, name, test.mode, result);
           }
         } catch (error) {
-          if (Check.reason !== null) {
-            return skip(specifier, "aran", Check.reason);
+          if (error.name === "MissingFeatureAranError") {
+            return skip(specifier, "aran", error.message);
           }
-        }
-        if (Check.reason !== null) {
-          throw new global.Error("Failed syntactic check but Aran still passed???");
+          throw error;
         }
       }
     }

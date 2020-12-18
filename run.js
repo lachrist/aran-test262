@@ -41,7 +41,7 @@ const isError = (type, value) => {
 
 const cache = {__proto__:null};
 
-module.exports = (test, escape) => {
+module.exports = (test) => {
 
   test.attributes.includes.unshift("assert.js", "sta.js");
 
@@ -67,12 +67,16 @@ module.exports = (test, escape) => {
   // engine262.js:142527
   // function CreateBuiltinFunction(steps, internalSlotsList, realm, prototype, isConstructor = Value.false) {
 
-  if (typeof escape === "function") {
+  if (test.setup) {
+    test262realm.realm.evaluateScript(test.setup);
+  }
+
+  if (test.escape) {
     Engine262.CreateDataProperty(
       test262realm.$262,
-      new Engine262.Value(Env.ESCAPE_IDENTIFIER),
+      new Engine262.Value(test.escape.key),
       new Engine262.CreateBuiltinFunction(
-        escape,
+        test.escape.value,
         [],
         test262realm.realm,
         test262realm.realm.Intrinsics['%Function.prototype%'],
