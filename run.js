@@ -41,12 +41,13 @@ const isError = (type, value) => {
 
 const cache = {__proto__:null};
 
-module.exports = (test) => {
+module.exports = (test, agent) => {
 
-  test.attributes.includes.unshift("assert.js", "sta.js");
+  const includes = [].concat(test.attributes.includes);
+  includes.unshift("assert.js", "sta.js");
 
   if (test.attributes.flags.async) {
-    test.attributes.includes.unshift("doneprintHandle.js");
+    includes.unshift("doneprintHandle.js");
   }
 
   Engine262.setSurroundingAgent(
@@ -61,36 +62,66 @@ module.exports = (test) => {
               [feature])) :
             [])}));
 
-  // {file:test.file}
   const test262realm = Engine262Test262Realm.createRealm();
 
-  // engine262.js:142527
-  // function CreateBuiltinFunction(steps, internalSlotsList, realm, prototype, isConstructor = Value.false) {
+  let {setup, instrument} = agent();
 
-  if (test.setup) {
-    test262realm.realm.evaluateScript(test.setup);
-  }
+  instrument = (((old) => (code, source, serial, specifier) => (
+    console.log("instrumenting", specifier, source, serial),
+    Fs.writeFileSync(Path.join(__dirname, "original.js"), code, "utf8"),
+    code = old(code, source, serial),
+    Fs.writeFileSync(Path.join(__dirname, "instrumented.js"), code, "utf8"),
+    code)) (instrument));
 
-  if (test.escape) {
-    Engine262.CreateDataProperty(
-      test262realm.$262,
-      new Engine262.Value(test.escape.key),
-      new Engine262.CreateBuiltinFunction(
-        test.escape.value,
-        [],
-        test262realm.realm,
-        test262realm.realm.Intrinsics['%Function.prototype%'],
-        Engine262.Value.false));
-  }
+  Engine262.CreateDataProperty(
+    test262realm.$262,
+    new Engine262.Value("evalScript"),
+    new Engine262.CreateBuiltinFunction(
+      ([code]) => test262realm.realm.evaluateScript(
+        instrument(
+          code.stringValue(),
+          "script",
+          null)),
+      [],
+      test262realm.realm,
+      test262realm.realm.Intrinsics['%Function.prototype%'],
+      Engine262.Value.false));
+
+  Engine262.CreateDataProperty(
+    test262realm.$262,
+    new Engine262.Value("__instrument__"),
+    new Engine262.CreateBuiltinFunction(
+      ([code, source, location]) => new Engine262.Value(
+        instrument(
+          code.stringValue(),
+          source.stringValue(),
+          (
+            location === Engine262.Value.null ?
+            null :
+            location.numberValue()))),
+      [],
+      test262realm.realm,
+      test262realm.realm.Intrinsics['%Function.prototype%'],
+      Engine262.Value.false));
 
   return test262realm.realm.scope(() => {
 
-    for (const include of test.attributes.includes) {
+    {
+      const completion = test262realm.realm.evaluateScript(setup, {specifier:"setup"});
+      if (completion instanceof Engine262.AbruptCompletion) {
+        return {
+          status: Status.SETUP_FAILURE,
+          completion: Engine262.inspect(completion),
+        };
+      }
+    }
+
+    for (const include of includes) {
       if (!(include in cache)) {
         cache[include] = Fs.readFileSync(Path.join(Env.TEST262, "harness", include), "utf8");
       }
-      const completion = test262realm.realm.evaluateScript(cache[include], {
-        specifier: Path.join(Env.TEST262, "harness", include)
+      const completion = test262realm.realm.evaluateScript(instrument(cache[include], "script", null, include), {
+        specifier: Path.join(Env.TEST262, "harness",  include)
       });
       if (completion instanceof Engine262.AbruptCompletion) {
         return {
@@ -102,7 +133,7 @@ module.exports = (test) => {
     }
 
     {
-      const completion = test262realm.realm.evaluateScript(PRELUDE);
+      const completion = test262realm.realm.evaluateScript(instrument(PRELUDE, "script", null, "prelude"));
       if (completion instanceof Engine262.AbruptCompletion) {
         return {
           status: Status.PRELUDE_FAILURE,
@@ -130,8 +161,8 @@ module.exports = (test) => {
     {
       const specifier = Path.resolve(Env.TEST262, test.path);
       let completion;
-      if (test.attributes.flags.module) {
-        completion = test262realm.realm.createSourceTextModule(specifier, test.content);
+      if (test.mode === "module") {
+        completion = test262realm.realm.createSourceTextModule(specifier, instrument(test.content, "module", null, specifier));
         if (!(completion instanceof Engine262.AbruptCompletion)) {
           const module = completion;
           test262realm.resolverCache.set(specifier, module);
@@ -146,7 +177,7 @@ module.exports = (test) => {
           }
         }
       } else {
-        completion = test262realm.realm.evaluateScript(test.content, { specifier });
+        completion = test262realm.realm.evaluateScript(instrument(test.content, "script", null, specifier), { specifier });
       }
       if (completion instanceof Engine262.AbruptCompletion) {
         if (test.attributes.negative && isError(test.attributes.negative.type, completion.Value)) {

@@ -55,7 +55,7 @@ module.exports = (path) => {
   }
   return [{
     __proto__: normal,
-    mode: "strict"
+    mode: "normal"
   }, {
     __proto__: strict,
     mode: "strict"

@@ -25,6 +25,7 @@
 // const ASYNC_PRINT = 6;
 // const ASYNC_MISSING = 7;
 
+exports.SETUP_FAILURE = "SETUP_FAILURE";
 exports.INCLUDE_FAILURE = "include-failure";
 exports.PRELUDE_FAILURE = "prelude-failure";
 exports.CONTENT_FAILURE = "content-failure";

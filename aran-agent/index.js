@@ -28,15 +28,10 @@ module.exports = (name) => {
     pointcut: global.eval(Fs.readFileSync(Path.join(__dirname, name + "-pointcut.js"), "utf8")),
     advice: Fs.readFileSync(Path.join(__dirname, name + "-advice.js"), "utf8")
   };
-  return (test) => ({
-    __proto__: test,
+  return () => ({
     setup: reset(name),
-    content: instrument(test.content, test.mode === "module" ? "module" : "script"),
-    escape: {
-      key: "__aran_instrument__",
-      value: instrument
-    }
-  });
+    instrument
+  })
 };
 
 const reset = (name) => {
@@ -47,7 +42,7 @@ const reset = (name) => {
 
 const instrument = (code, source, serial) => aran.weave(code, {
   __proto__: null,
-  output: "code"
+  output: "code",
   source,
   serial,
   pointcut
