@@ -47,7 +47,7 @@ module.exports = (path) => {
     return [["normal", normal]];
   }
 
-  if (attributes.strictOnly) {
+  if (attributes.flags.onlyStrict) {
     return [["strict", strict]];
   }
 

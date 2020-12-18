@@ -8,23 +8,7 @@ const Status = require("./status.js");
 const Engine262 = require(Path.join(Env.ENGINE262, "dist", "engine262.js"));
 const Engine262Test262Realm = require(Path.join(Env.ENGINE262, "bin", "test262_realm.js"));
 
-const PRELUDE = `\
-var Test262Error = class Test262Error extends Error {};
-Test262Error.thrower = (...args) => {
-  throw new Test262Error(...args);
-};
-
-function $DONE(error) {
-  if (error) {
-    if (typeof error === "object" && error !== null && "stack" in error) {
-      __consolePrintHandle__("Test262:AsyncTestFailure:" + error.stack);
-    } else {
-      __consolePrintHandle__("Test262:AsyncTestFailure:Test262Error: " + error);
-    }
-  } else {
-    __consolePrintHandle__("Test262:AsyncTestComplete");
-  }
-}`;
+const PRELUDE = Fs.readFileSync(Path.join(__dirname, "prelude.js"), "utf8");
 
 const feature_map = Object.fromEntries(Fs
   .readFileSync(
@@ -61,8 +45,9 @@ module.exports = (test, escape) => {
 
   test.attributes.includes.unshift("assert.js", "sta.js");
 
-  if (test.attributes.flags.async)
+  if (test.attributes.flags.async) {
     test.attributes.includes.unshift("doneprintHandle.js");
+  }
 
   Engine262.setSurroundingAgent(
     new Engine262.Agent(
@@ -91,42 +76,52 @@ module.exports = (test, escape) => {
         [],
         test262realm.realm,
         test262realm.realm.Intrinsics['%Function.prototype%'],
-        Engine262.Value.false));}
+        Engine262.Value.false));
+  }
 
   return test262realm.realm.scope(() => {
 
     for (const include of test.attributes.includes) {
-      if (!(include in cache))
-        cache[include] = Fs.readFileSync(
-          Path.join(Env.TEST262, "harness", include),
-          "utf8");
-      const completion = test262realm.realm.evaluateScript(
-        cache[include],
-        {specifier: Path.join(Env.TEST262, "harness", include)});
-      if (completion instanceof Engine262.AbruptCompletion)
+      if (!(include in cache)) {
+        cache[include] = Fs.readFileSync(Path.join(Env.TEST262, "harness", include), "utf8");
+      }
+      const completion = test262realm.realm.evaluateScript(cache[include], {
+        specifier: Path.join(Env.TEST262, "harness", include)
+      });
+      if (completion instanceof Engine262.AbruptCompletion) {
         return {
           status: Status.INCLUDE_FAILURE,
           completion: Engine262.inspect(completion),
-          include: include};}
+          include: include
+        };
+      }
+    }
 
     {
       const completion = test262realm.realm.evaluateScript(PRELUDE);
-      if (completion instanceof Engine262.AbruptCompletion)
+      if (completion instanceof Engine262.AbruptCompletion) {
         return {
           status: Status.PRELUDE_FAILURE,
-          completion: Engine262.inspect(completion)};}
+          completion: Engine262.inspect(completion)
+        };
+      }
+    }
 
-    let async_result = null;
+    let async_result = global.undefined;
 
-    if (test.attributes.flags.async)
+    if (test.attributes.flags.async) {
       test262realm.setPrintHandle((m) => {
-        if (m.stringValue && m.stringValue() === "Test262:AsyncTestComplete")
-          async_result = {status:Status.SUCCESS};
-        else
+        if (m.stringValue && m.stringValue() === "Test262:AsyncTestComplete") {
+          async_result = null;
+        } else {
           async_result = {
             status: Status.ASYNC_PRINT,
-            message: m.stringValue ? m.stringValue() : Engine262.inspect(m)};
-        test262realm.setPrintHandle(undefined);});
+            message: m.stringValue ? m.stringValue() : Engine262.inspect(m)
+          };
+        }
+        test262realm.setPrintHandle(undefined);
+      });
+    }
 
     {
       const specifier = Path.resolve(Env.TEST262, test.path);
@@ -138,40 +133,47 @@ module.exports = (test, escape) => {
           test262realm.resolverCache.set(specifier, module);
           completion = module.Link();
           if (!(completion instanceof Engine262.AbruptCompletion)) {
-            completion = module.Evaluate();}
-          if (
-            (
-              !(completion instanceof Engine262.AbruptCompletion) &&
-              completion.PromiseState === "rejected")) {
-            completion = Engine262.Throw(completion.PromiseResult);}}}
-      else {
-        completion = test262realm.realm.evaluateScript(test.content, { specifier }); }
-      if (completion instanceof Engine262.AbruptCompletion)
-        return (
-          (
-            test.attributes.negative &&
-            isError(test.attributes.negative.type, completion.Value)) ?
-          {status:Status.SUCCESS} :
-          {
-            status: Status.CONTENT_FAILURE,
-            completion: Engine262.inspect(completion)});}
+            completion = module.Evaluate();
+          }
+          if (!(completion instanceof Engine262.AbruptCompletion)) {
+            if (completion.PromiseState === "rejected") {
+              completion = Engine262.Throw(completion.PromiseResult);
+            }
+          }
+        }
+      } else {
+        completion = test262realm.realm.evaluateScript(test.content, { specifier });
+      }
+      if (completion instanceof Engine262.AbruptCompletion) {
+        if (test.attributes.negative && isError(test.attributes.negative.type, completion.Value)) {
+          return null;
+        }
+        return {
+          status: Status.CONTENT_FAILURE,
+          completion: Engine262.inspect(completion)
+        };
+      }
+    }
 
-    if (test.attributes.flags.async)
-      return (
-        async_result === null ?
-        {satus: Status.ASYNC_MISSING} :
-        async_result);
+    if (test.attributes.flags.async) {
+      if (async_result === global.undefined) {
+        return {satus: Status.ASYNC_MISSING};
+      }
+      return async_result;
+    }
 
-    if (test262realm.trackedPromises.length > 0)
+    if (test262realm.trackedPromises.length > 0) {
       return {
         status: Status.PENDING_PROMISE,
-        promise: Engine262.inspect(test262realm.trackedPromises[0])};
+        promise: Engine262.inspect(test262realm.trackedPromises[0])
+      };
+    }
 
-    if (test.attributes.negative)
-      return {
-        status: Status.NEGATIVE_FAILURE};
+    if (test.attributes.negative) {
+      return {status: Status.NEGATIVE_FAILURE};
+    }
 
-    return {status:Status.SUCCESS};
+    return null;
 
   });
 

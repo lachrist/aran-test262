@@ -10,7 +10,7 @@ exports.CheckError = CheckError;
 const check = (node) => {
   if (node.type === "FunctionExpression" || node.type === "FunctionDeclaration" || node.type === "ArrowFunctionExpression") {
     if (node.async) {
-      return "aync";
+      return "async";
     }
     if (node.generator) {
       return "generator";
@@ -50,9 +50,8 @@ const loop = (parent) => {
   return null;
 };
 
+exports.reason = null;
+
 exports.check = (node) => {
-  const reason = loop(node);
-  if (reason !== null) {
-    throw new CheckError(reason);
-  }
+  exports.reason = loop(node);
 };
