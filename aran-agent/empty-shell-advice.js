@@ -5,13 +5,14 @@
       const global_Function = Function;
       const global_String = String;
       const global_eval = eval;
-      const global_Reflect_apply = Reflect.apply
+      const global_Reflect_apply = Reflect.apply;
+      const global_Reflect_construct = Reflect.construct;
       const global_Array_prototype_join = Array.prototype.join;
       const global_Array_prototype_map = Array.prototype.map;
       const global_Array_prototype_slice = Array.prototype.slice;
       const advice = {__proto__:null};
       __aran__["aran.advice"] = advice;
-      advice.code = (code) => (
+      advice.code = (code, serial) => (
         typeof code === "string" ?
         instrument(code, "eval", serial) :
         code);

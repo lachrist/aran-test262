@@ -65,12 +65,13 @@ module.exports = (test, agent) => {
   const test262realm = Engine262Test262Realm.createRealm();
 
   let {setup, instrument} = agent();
-
+  let counter = 0;
   instrument = (((old) => (code, source, serial, specifier) => (
     console.log("instrumenting", specifier, source, serial),
-    Fs.writeFileSync(Path.join(__dirname, "original.js"), code, "utf8"),
+    counter++,
+    Fs.writeFileSync(Path.join(__dirname, "dump", `${counter}-original.js`), code, "utf8"),
     code = old(code, source, serial),
-    Fs.writeFileSync(Path.join(__dirname, "instrumented.js"), code, "utf8"),
+    Fs.writeFileSync(Path.join(__dirname, "dump", `${counter}-instrumented.js`), code, "utf8"),
     code)) (instrument));
 
   Engine262.CreateDataProperty(

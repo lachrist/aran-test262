@@ -37,7 +37,7 @@ module.exports = (name) => {
 const reset = (name) => {
   aran = new Aran({parser});
   pointcut = cache[name].pointcut;
-  return `const ${aran.namespace} = ${aran.intrinsic.script}${"\n"}${aran.namespace}["aran.advice"] = ${cache[name].advice}`;
+  return `this[${global.JSON.stringify(aran.namespace)}] = ${aran.intrinsic.script}${"\n"}${aran.namespace}["aran.advice"] = ${cache[name].advice}`;
 };
 
 const instrument = (code, source, serial) => aran.weave(code, {

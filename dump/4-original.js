@@ -1,3 +1,4 @@
+"use strict";
 /*---
 info: |
     Result of boolean conversion from number value is false if the argument
@@ -5,16 +6,18 @@ info: |
 esid: sec-toboolean
 description: +0, -0 and NaN convert to Boolean by explicit transformation
 ---*/
-const geval = eval;
-if (eval(`123;`) !== 123) {
-  throw `direct-eval-call`;
-}
-if (geval(`456;`) !== 456) {
-  throw `indirect-eval-call`;
-}
-if (Function(`return 789;`)() !== 789) {
-  throw `function-construction`;
-}
+
+const x = Array;
+x;
+// if (eval(`123;`) !== 123) {
+//   throw `direct-eval-call`;
+// }
+// if (geval(`456;`) !== 456) {
+//   throw `indirect-eval-call`;
+// }
+// if (Function(`return 789;`)() !== 789) {
+//   throw `function-construction`;
+// }
 // print("wesh");
 
 // print($262.evalScript("123;"));
