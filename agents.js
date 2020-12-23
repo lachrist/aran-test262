@@ -19,10 +19,10 @@ module.exports = new Map([
           code,
           {
             ecmaVersion: 2020,
-            sourceType: test.mode === "module" ? "module" : "script"}))})],
+            sourceType: source === "module" ? "module" : "script"}))})],
+  [
+    "aran-enclave-empty",
+    AranAgent("enclave-empty")],
   [
     "aran-empty",
-    AranAgent("empty")],
-  [
-    "aran-empty-shell",
-    AranAgent("empty-shell")]]);
+    AranAgent("empty")]]);

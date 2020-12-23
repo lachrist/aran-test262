@@ -66,9 +66,9 @@ module.exports = (test, agent) => {
 
   let {setup, instrument} = agent();
   let counter = 0;
+
   instrument = (((old) => (code, source, serial, specifier) => (
-    console.log("instrumenting", specifier, source, serial),
-    counter++,
+    console.log("instrumenting", ++counter, specifier, source, serial),
     Fs.writeFileSync(Path.join(__dirname, "dump", `${counter}-original.js`), code, "utf8"),
     code = old(code, source, serial),
     Fs.writeFileSync(Path.join(__dirname, "dump", `${counter}-instrumented.js`), code, "utf8"),
@@ -76,30 +76,17 @@ module.exports = (test, agent) => {
 
   Engine262.CreateDataProperty(
     test262realm.$262,
-    new Engine262.Value("evalScript"),
-    new Engine262.CreateBuiltinFunction(
-      ([code]) => test262realm.realm.evaluateScript(
-        instrument(
-          code.stringValue(),
-          "script",
-          null)),
-      [],
-      test262realm.realm,
-      test262realm.realm.Intrinsics['%Function.prototype%'],
-      Engine262.Value.false));
-
-  Engine262.CreateDataProperty(
-    test262realm.$262,
     new Engine262.Value("__instrument__"),
     new Engine262.CreateBuiltinFunction(
-      ([code, source, location]) => new Engine262.Value(
+      ([code, source, location, specifier]) => new Engine262.Value(
         instrument(
           code.stringValue(),
           source.stringValue(),
           (
             location === Engine262.Value.null ?
             null :
-            location.numberValue()))),
+            location.numberValue()),
+          specifier.stringValue())),
       [],
       test262realm.realm,
       test262realm.realm.Intrinsics['%Function.prototype%'],
@@ -108,7 +95,8 @@ module.exports = (test, agent) => {
   return test262realm.realm.scope(() => {
 
     {
-      const completion = test262realm.realm.evaluateScript(setup, {specifier:"setup"});
+      Fs.writeFileSync(Path.join(__dirname, "dump", `setup.js`), setup, "utf8")
+      const completion = test262realm.realm.evaluateScript(setup, {specifier:"setup.js"});
       if (completion instanceof Engine262.AbruptCompletion) {
         return {
           status: Status.SETUP_FAILURE,
@@ -121,8 +109,11 @@ module.exports = (test, agent) => {
       if (!(include in cache)) {
         cache[include] = Fs.readFileSync(Path.join(Env.TEST262, "harness", include), "utf8");
       }
-      const completion = test262realm.realm.evaluateScript(instrument(cache[include], "script", null, include), {
-        specifier: Path.join(Env.TEST262, "harness",  include)
+      // No harness file declares let/const/class variables.
+      // So they do not polute the global declarative record.
+      // Hence they do not need to be instrumented.
+      const completion = test262realm.realm.evaluateScript(cache[include], {
+        specifier: Path.join(Env.TEST262, "harness", include)
       });
       if (completion instanceof Engine262.AbruptCompletion) {
         return {
@@ -134,7 +125,9 @@ module.exports = (test, agent) => {
     }
 
     {
-      const completion = test262realm.realm.evaluateScript(instrument(PRELUDE, "script", null, "prelude"));
+      // Prelude does not populate the global declarative record.
+      // Hence they do not need to be instrumented.
+      const completion = test262realm.realm.evaluateScript(PRELUDE);
       if (completion instanceof Engine262.AbruptCompletion) {
         return {
           status: Status.PRELUDE_FAILURE,
@@ -178,7 +171,7 @@ module.exports = (test, agent) => {
           }
         }
       } else {
-        completion = test262realm.realm.evaluateScript(instrument(test.content, "script", null, specifier), { specifier });
+        completion = test262realm.realm.evaluateScript(instrument(test.content, "script", null, specifier), {specifier});
       }
       if (completion instanceof Engine262.AbruptCompletion) {
         if (test.attributes.negative && isError(test.attributes.negative.type, completion.Value)) {
