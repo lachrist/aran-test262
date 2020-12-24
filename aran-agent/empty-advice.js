@@ -14,7 +14,7 @@
       const global_Array_prototype_map = this.Array.prototype.map;
       const global_Array_prototype_slice = this.Array.prototype.slice;
       evalScript("const eval = this.eval");
-      $262.evalScript = (code) => evalScript(instrument(code, "script", null, "eval-script"));
+      $262.evalScript = (code) => evalScript(instrument(code, "script", null, "script"));
       this.eval = (value) => (
         typeof value === "string" ?
         global_eval(

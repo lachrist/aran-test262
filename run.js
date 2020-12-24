@@ -67,12 +67,12 @@ module.exports = (test, agent) => {
   let {setup, instrument} = agent();
   let counter = 0;
 
-  instrument = (((old) => (code, source, serial, specifier) => (
-    console.log("instrumenting", ++counter, specifier, source, serial),
-    Fs.writeFileSync(Path.join(__dirname, "dump", `${counter}-original.js`), code, "utf8"),
-    code = old(code, source, serial),
-    Fs.writeFileSync(Path.join(__dirname, "dump", `${counter}-instrumented.js`), code, "utf8"),
-    code)) (instrument));
+  // instrument = (((old) => (code, source, serial, specifier) => (
+  //   console.log("instrumenting", ++counter, specifier, source, serial),
+  //   Fs.writeFileSync(Path.join(__dirname, "dump", `${counter}-original.js`), code, "utf8"),
+  //   code = old(code, source, serial),
+  //   Fs.writeFileSync(Path.join(__dirname, "dump", `${counter}-instrumented.js`), code, "utf8"),
+  //   code)) (instrument));
 
   Engine262.CreateDataProperty(
     test262realm.$262,
@@ -95,7 +95,7 @@ module.exports = (test, agent) => {
   return test262realm.realm.scope(() => {
 
     {
-      Fs.writeFileSync(Path.join(__dirname, "dump", `setup.js`), setup, "utf8")
+      // Fs.writeFileSync(Path.join(__dirname, "dump", `setup.js`), setup, "utf8")
       const completion = test262realm.realm.evaluateScript(setup, {specifier:"setup.js"});
       if (completion instanceof Engine262.AbruptCompletion) {
         return {

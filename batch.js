@@ -20,28 +20,13 @@ const Run = require("./run.js");
 // node batch --target yo.js --agent aran-empty --mode normal --slow
 const argv = Minimist(process.argv.slice(2));
 
-// if ("reset-done" in argv) {
-//   Fs.writeFileSync(Path.join(__dirname, "donelist.txt"), "", "utf8");
-// }
-
 const path = "target" in argv ? Path.resolve(argv.target) : Path.join(Env.TEST262, "test");
-
-// if (!path.startsWith(Env.TEST262)) {
-//   process.stderr.write("Test home should be " + Env.TEST262 + "\n");
-//   process.exit(1);
-// }
 
 /////////////////
 // Termination //
 /////////////////
 
 let database = new global.Map();
-
-// let database = {
-//   skipped: new global.Set(),
-//   failure: new global.Set(),
-//   success: new global.Set()
-// };
 
 try {
   database = new global.Map(global.JSON.parse(Fs.readFileSync(Path.join(__dirname, "database.json"), "utf8")));
@@ -70,11 +55,6 @@ process.on("uncaughtException", terminate);
 
 process.on("SIGINT", () => terminate(null));
 
-//////////////////
-// Intercepters //
-//////////////////
-
-
 ///////////
 // Lists //
 ///////////
@@ -93,11 +73,20 @@ const aran_disabled_feature_list = new Set(read_list_path(Path.join(__dirname, "
 const is_aran_disabled_feature = (feature) => aran_disabled_feature_list.has(feature);
 const is_engine262_disabled_feature = (feature) => engine262_disabled_feature_list.has(feature);
 
-// const donelist = new Set(Fs.readFileSync(Path.join(__dirname, "donelist.txt"), "utf8").split("\n"));
-
 //////////
 // Loop //
 //////////
+
+const done = (specifier) => {
+  process.stdout.write(Chalk.green(" done") + "\n", "utf8");
+  global.setImmediate(loop);
+};
+
+const pass = (specifier) => {
+  process.stdout.write(Chalk.green(` passed`) + "\n", "utf8");
+  database.set(specifier, null);
+  global.setImmediate(loop);
+};
 
 const skip = (specifier, agent, reason) => {
   process.stdout.write(Chalk[agent === "aran" ? "bgYellow" : "yellow"](` skipped >> ${agent} >> ${reason}`) + "\n", "utf8");
@@ -105,20 +94,9 @@ const skip = (specifier, agent, reason) => {
   global.setImmediate(loop);
 };
 
-const done = (specifier) => {
-  process.stdout.write(Chalk.green(" done") + "\n", "utf8");
-  global.setImmediate(loop);
-};
-
-const fail = (specifier, intercepter, mode, result) => {
-  process.stdout.write(Chalk[intercepter.startsWith("aran-") ? "bgRed" : "red"](` failure >> ${intercepter} >> ${mode}`) + "\n" + Util.inspect(result, {depth:0/0}) + "\n", "utf8");
-  database.set(specifier, ["FAILURE", intercepter, mode, result]);
-  global.setImmediate(loop);
-};
-
-const pass = (specifier) => {
-  process.stdout.write(Chalk.green(` passed`) + "\n", "utf8");
-  database.set(specifier, null);
+const fail = (specifier, agent, mode, result) => {
+  process.stdout.write(Chalk[agent.startsWith("aran-") ? "bgRed" : "red"](` failure >> ${agent} >> ${mode}`) + "\n" + Util.inspect(result, {depth:0/0}) + "\n", "utf8");
+  database.set(specifier, ["FAILURE", agent, mode, result]);
   global.setImmediate(loop);
 };
 
@@ -157,23 +135,24 @@ const loop = () => {
   if (tests[0].attributes.raw) {
     return skip(specifier, "aran", "raw");
   }
-  // if (tests[0][1].attributes.module) {
-  //   return skip(specifier, "aran", "module");
-  // }
   for (let [name, agent] of Agents.entries()) {
     for (let test of tests) {
-      if (!("mode" in argv) || test.mode === argv.mode) {
-        try {
-          const result = Run(agent(test));
-          if (result !== null) {
-            return fail(specifier, name, test.mode, result);
-          }
-        } catch (error) {
-          if (error.name === "MissingFeatureAranError") {
-            return skip(specifier, "aran", error.message);
-          }
-          throw error;
+      try {
+        const result = Run(test, agent);
+        if (result !== null) {
+          return fail(specifier, name, test.mode, result);
         }
+      } catch (error) {
+        if (error.name === "AsynchronousClosureAranError") {
+          return skip(specifier, "aran", `asynchronous-closure`)
+        }
+        if (error.name === "GeneratorClosureAranError") {
+          return skip(specifier, "aran", `generator-closure`);
+        }
+        if (error.name === "EnclaveLimitationAranError") {
+          return skip(specifier, "aran", `enclave-limitation >> ${error.message}`);
+        }
+        throw error;
       }
     }
   }
