@@ -1,1 +1,31 @@
+
+# Object.prototype.toString
+built-ins/Array/prototype/every/15.4.4.16-1-15.js
+built-ins/Array/prototype/filter/15.4.4.20-1-15.js
+built-ins/Array/prototype/forEach/15.4.4.18-1-15.js
+built-ins/Array/prototype/map/15.4.4.19-1-15.js
+built-ins/Array/prototype/reduce/15.4.4.21-1-15.js
+built-ins/Array/prototype/reduceRight/15.4.4.22-1-15.js
+built-ins/Array/prototype/some/15.4.4.17-1-15.js
+
+# Function.prototype.toString
 built-ins/Function/prototype/toString/*.js
+
+# noop failure
+built-ins/ArrayBuffer/prototype/byteLength/detached-buffer.js
+
+# Engine262 bug?
+# this.Reflect.apply(this.BigInt.asIntN, this.BigInt, [0, 0n]);
+# https://github.com/engine262/engine262/issues/148
+built-ins/BigInt/asIntN/*.js
+built-ins/BigInt/asUintN/*.js
+built-ins/BigInt/prototype/valueOf/return.js
+built-ins/BigInt/prototype/valueOf/cross-realm.js
+
+# Asynchronous closure
+built-ins/AsyncFromSyncIteratorPrototype/**/*.js
+built-ins/AsyncFunction/**/*.js
+
+# Generator closure
+built-ins/AsyncGeneratorFunction/**/*.js
+built-ins/AsyncGeneratorPrototype/**/*.js

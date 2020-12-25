@@ -65,6 +65,7 @@ module.exports = (test, agent) => {
   const test262realm = Engine262Test262Realm.createRealm();
 
   let {setup, instrument} = agent();
+
   let counter = 0;
 
   // instrument = (((old) => (code, source, serial, specifier) => (

@@ -17,7 +17,7 @@ const Run = require("./run.js");
 // Argv //
 //////////
 
-// node batch --target yo.js --agent aran-empty --mode normal --slow
+// node batch --target yo.js --agent aran-empty --slow
 const argv = Minimist(process.argv.slice(2));
 
 const path = "target" in argv ? Path.resolve(argv.target) : Path.join(Env.TEST262, "test");
@@ -68,6 +68,7 @@ const engine262_skip_list = new Set(read_list_path(Path.join(Env.ENGINE262, "tes
 const engine262_disabled_feature_list = new Set(read_list(Path.join(Env.ENGINE262, "test", "test262", "features")).filter((line) => line.startsWith("-")).map((line) => line.substring(1)));
 
 const aran_skip_list = new Set(read_list_path(Path.join(__dirname, "skiplist.txt")));
+console.log(aran_skip_list);
 const aran_disabled_feature_list = new Set(read_list_path(Path.join(__dirname, "disabled-features.txt")));
 
 const is_aran_disabled_feature = (feature) => aran_disabled_feature_list.has(feature);
