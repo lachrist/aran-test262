@@ -3,7 +3,7 @@
 const Path = require("path");
 const Fs = require("fs");
 const JsYaml = require("js-yaml");
-
+// b8793e95d9a41c3cf18e1f005c36d0630f2b2c4d
 module.exports = (path) => {
   const content = Fs.readFileSync(path, "utf8");
   const yamlStart = content.indexOf("/*---") + 5;

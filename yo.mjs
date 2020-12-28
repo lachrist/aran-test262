@@ -1,1 +1,1 @@
-export {this as foo};
+export const x = "foo";

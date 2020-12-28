@@ -17,11 +17,13 @@
     "Engine262"
   ],
   "dependencies": {
+    "@engine262/engine262": "0.0.1-249f092d2566683e8f52133192f50e90d41c3f42",
     "acorn": "^8.0.4",
     "chalk": "^4.1.0",
     "escodegen": "^2.0.0",
     "glob": "^7.1.6",
     "js-yaml": "^3.14.0",
-    "minimist": "^1.2.5"
+    "minimist": "^1.2.5",
+    "test262": "file:test262"
   }
 }

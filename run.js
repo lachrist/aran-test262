@@ -79,15 +79,21 @@ module.exports = (test, agent) => {
     test262realm.$262,
     new Engine262.Value("__instrument__"),
     new Engine262.CreateBuiltinFunction(
-      ([code, source, location, specifier]) => new Engine262.Value(
-        instrument(
-          code.stringValue(),
-          source.stringValue(),
-          (
-            location === Engine262.Value.null ?
-            null :
-            location.numberValue()),
-          specifier.stringValue())),
+      ([code, source, location, specifier]) => {
+        try {
+          return new Engine262.Value(
+            instrument(
+              code.stringValue(),
+              source.stringValue(),
+              (
+                location === Engine262.Value.null ?
+                null :
+                location.numberValue()),
+              specifier.stringValue())); }
+        catch (error) {
+          if (error instanceof SyntaxError) {
+            return Engine262.Throw("SyntaxError", "Raw", error.message); }
+          throw error; } },
       [],
       test262realm.realm,
       test262realm.realm.Intrinsics['%Function.prototype%'],
@@ -157,7 +163,20 @@ module.exports = (test, agent) => {
       const specifier = Path.resolve(Env.TEST262, test.path);
       let completion;
       if (test.mode === "module") {
-        completion = test262realm.realm.createSourceTextModule(specifier, instrument(test.content, "module", null, specifier));
+        test262realm.resolverCache = {
+          has: () => true,
+          get: (specifier) => {},
+          set: () => {},
+        };
+
+        try {
+          completion = test262realm.realm.createSourceTextModule(specifier, instrument(test.content, "module", null, specifier));
+        } catch (error) {
+          if (error instanceof SyntaxError) {
+            completion = Engine262.Throw("SyntaxError", "Raw", error.message);
+          }
+          throw error;
+        }
         if (!(completion instanceof Engine262.AbruptCompletion)) {
           const module = completion;
           test262realm.resolverCache.set(specifier, module);
@@ -172,7 +191,14 @@ module.exports = (test, agent) => {
           }
         }
       } else {
-        completion = test262realm.realm.evaluateScript(instrument(test.content, "script", null, specifier), {specifier});
+        try {
+          completion = test262realm.realm.evaluateScript(instrument(test.content, "script", null, specifier), {specifier});
+        } catch (error) {
+          if (error instanceof SyntaxError) {
+            completion = syntax_error_throw_completion(error.message);
+          }
+          throw error;
+        }
       }
       if (completion instanceof Engine262.AbruptCompletion) {
         if (test.attributes.negative && isError(test.attributes.negative.type, completion.Value)) {

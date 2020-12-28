@@ -1,4 +1,5 @@
 "use strict";
+global.Error.stackTraceLimit = 1/0;
 
 const Path = require("path");
 const Fs = require("fs");
@@ -63,12 +64,12 @@ const read_list = (path) => Fs.readFileSync(path, "utf8").split("\n").filter((li
 
 const read_list_path = (path) => read_list(path).flatMap((line) => Glob.sync(Path.resolve(Env.TEST262, "test", line))).map((path) => Path.relative(Env.TEST262, path));
 
-const engine262_slow_list = new Set(read_list_path(Path.join(Env.ENGINE262, "test", "test262", "slowlist")));
+// const engine262_slow_list = new Set(read_list_path(Path.join(Env.ENGINE262, "test", "test262", "slowlist")));
 const engine262_skip_list = new Set(read_list_path(Path.join(Env.ENGINE262, "test", "test262", "skiplist")));
 const engine262_disabled_feature_list = new Set(read_list(Path.join(Env.ENGINE262, "test", "test262", "features")).filter((line) => line.startsWith("-")).map((line) => line.substring(1)));
 
 const aran_skip_list = new Set(read_list_path(Path.join(__dirname, "skiplist.txt")));
-console.log(aran_skip_list);
+
 const aran_disabled_feature_list = new Set(read_list_path(Path.join(__dirname, "disabled-features.txt")));
 
 const is_aran_disabled_feature = (feature) => aran_disabled_feature_list.has(feature);
@@ -115,14 +116,14 @@ const loop = () => {
   if (database.has(specifier) && database.get(specifier) === null) {
     return done(specifier);
   }
-  if (engine262_slow_list.has(specifier) && !argv.slow) {
-    return skip(specifier, "engine262", "slow");
-  }
+  // if (engine262_slow_list.has(specifier) && !argv.slow) {
+  //   return skip(specifier, "engine262", "slow");
+  // }
   if (engine262_skip_list.has(specifier)) {
-    return skip(specifier, "engine262", "skip");
+    return skip(specifier, "engine262", "skip-list");
   }
   if (aran_skip_list.has(specifier)) {
-    return skip(specifier, "aran", "skip");
+    return skip(specifier, "aran", "skip-list");
   }
   const tests = Parse(step.value);
   if ("features" in tests[0].attributes) {

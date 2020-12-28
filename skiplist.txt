@@ -14,17 +14,25 @@ built-ins/Function/prototype/toString/*.js
 # noop failure
 built-ins/ArrayBuffer/prototype/byteLength/detached-buffer.js
 
-# Engine262 bug?
-# this.Reflect.apply(this.BigInt.asIntN, this.BigInt, [0, 0n]);
+# Engine262 bug: this.Reflect.apply(this.BigInt.asIntN, this.BigInt, [0, 0n]);
 # https://github.com/engine262/engine262/issues/148
-built-ins/BigInt/asIntN/*.js
-built-ins/BigInt/asUintN/*.js
-built-ins/BigInt/prototype/valueOf/return.js
-built-ins/BigInt/prototype/valueOf/cross-realm.js
+# built-ins/BigInt/asIntN/*.js
+# built-ins/BigInt/asUintN/*.js
+# built-ins/BigInt/prototype/valueOf/return.js
+# built-ins/BigInt/prototype/valueOf/cross-realm.js
+# built-ins/BigInt/call-value-of-when-to-string-present.js
+# built-ins/BigInt/constructor-empty-string.js
+# built-ins/BigInt/constructor-from-binary-string.js
+# built-ins/BigInt/constructor-from-decimal-string.js
+# built-ins/BigInt/constructor-from-hex-string.js
+# built-ins/BigInt/constructor-from-octal-string.js
+# built-ins/BigInt/constructor-integer.js
+# built-ins/BigInt/constructor-trailing-leading-spaces.js
 
 # Asynchronous closure
 built-ins/AsyncFromSyncIteratorPrototype/**/*.js
 built-ins/AsyncFunction/**/*.js
+built-ins/AsyncIteratorPrototype/**/*.js
 
 # Generator closure
 built-ins/AsyncGeneratorFunction/**/*.js
