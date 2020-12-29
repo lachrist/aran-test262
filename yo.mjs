@@ -1,1 +1,1 @@
-export const x = "foo";
+import * as yo from "foobar"

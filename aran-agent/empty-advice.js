@@ -1,8 +1,6 @@
 (
   (
     () => {
-      const instrument = $262.__instrument__;
-      const evalScript = $262.evalScript;
       const global_Function = this.Function;
       const global_Function_prototype = this.Function.prototype;
       const global_String = this.String;
@@ -13,12 +11,10 @@
       const global_Array_prototype_join = this.Array.prototype.join;
       const global_Array_prototype_map = this.Array.prototype.map;
       const global_Array_prototype_slice = this.Array.prototype.slice;
-      evalScript("const eval = this.eval");
-      $262.evalScript = (code) => evalScript(instrument(code, "script", null, "script"));
       this.eval = (value) => (
         typeof value === "string" ?
         global_eval(
-          instrument(value, "eval", null, "indirect-eval-call")) :
+          $262.instrument(value, "eval", null, "indirect-eval-call")) :
         code);
       global_Reflect_defineProperty(
         this.eval,
@@ -27,7 +23,7 @@
           __proto__: null,
           value: "eval"});
       this.Function = function Function (...values) { return global_eval(
-        instrument(
+        $262.instrument(
           (
             values.length === 0 ?
             `(function anonymous(${"\n"}) {${"\n\n"}});` :
@@ -65,6 +61,6 @@
         eval: (value, perform, serial) => perform(
           (
             typeof value === "string" ?
-            instrument(value, "eval", serial, "direct-eval-call") :
+            $262.instrument(value, "eval", serial, "direct-eval-call") :
             value)) }; })
   ());

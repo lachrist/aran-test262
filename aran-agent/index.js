@@ -5,11 +5,6 @@ const Fs = require("fs");
 const Acorn = require("acorn");
 const Aran = require("../../aran/lib/index.js");
 
-let aran = null;
-let pointcut = null;
-
-const cache = {__proto__:null};
-
 const parser = {
   script: (code, options) => Acorn.parse(code, {
     __proto__: null,
@@ -24,26 +19,37 @@ const parser = {
 };
 
 module.exports = (name) => {
-  cache[name] = {
-    pointcut: global.eval(Fs.readFileSync(Path.join(__dirname, name + "-pointcut.js"), "utf8")),
-    advice: Fs.readFileSync(Path.join(__dirname, name + "-advice.js"), "utf8")
+  const pointcut = global.eval(Fs.readFileSync(Path.join(__dirname, name + "-pointcut.js"), "utf8"));
+  const advice = Fs.readFileSync(Path.join(__dirname, name + "-advice.js"), "utf8");
+  return () => {
+    const aran = new Aran({parser});
+    return {
+      setup: (
+        `let eval = this.eval;${
+          "\n"
+        }this[${global.JSON.stringify(aran.namespace)}] = ${aran.intrinsic.script}${
+          "\n"
+        }${aran.namespace}["aran.advice"] = ${advice};`
+      ),
+      enclave: name.startsWith("enclave-"),
+      instrument: {
+        module: (code, specifier) => aran.weave(code, {
+          output: "code",
+          source: "module",
+          pointcut
+        }),
+        script: (code, specifier) => aran.weave(code, {
+          output: "code",
+          source: "script",
+          pointcut
+        }),
+        eval: (code, location, specifier) => aran.weave(code, {
+          output: "code",
+          source: "eval",
+          serial: location,
+          pointcut
+        })
+      }
+    };
   };
-  return () => ({
-    setup: reset(name),
-    instrument
-  })
 };
-
-const reset = (name) => {
-  aran = new Aran({parser});
-  pointcut = cache[name].pointcut;
-  return `this[${global.JSON.stringify(aran.namespace)}] = ${aran.intrinsic.script}${"\n"}${aran.namespace}["aran.advice"] = ${cache[name].advice}`;
-};
-
-const instrument = (code, source, serial) => aran.weave(code, {
-  __proto__: null,
-  output: "code",
-  source,
-  serial,
-  pointcut
-});

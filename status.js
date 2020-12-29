@@ -25,11 +25,16 @@
 // const ASYNC_PRINT = 6;
 // const ASYNC_MISSING = 7;
 
-exports.SETUP_FAILURE = "SETUP_FAILURE";
-exports.INCLUDE_FAILURE = "include-failure";
-exports.PRELUDE_FAILURE = "prelude-failure";
+exports.SETUP_FAILURE = "setup-failure";
+exports.HARNESS_FAILURE = "harness-failure";
 exports.CONTENT_FAILURE = "content-failure";
-exports.MISSING_NEGATIVE = "missing-negative";
-exports.PENDING_PROMISE = "pending-promise";
-exports.ASYNC_PRINT = "async-print";
+
+exports.NEGATIVE_MISSING = "negative-messing";
+exports.NEGATIVE_INVALID = "negative-invalid";
+
+exports.ASYNC_FAILURE = "async-failure";
 exports.ASYNC_MISSING = "async-missing";
+exports.ASYNC_PRESENT = "async-present";
+exports.ASYNC_DUPLICATE = "async-duplicate";
+
+exports.PENDING_PROMISES = "pending-promises";
