@@ -1,5 +1,5 @@
 
-# Object.prototype.toString
+# Object.prototype.toString (Arguments)
 built-ins/Array/prototype/every/15.4.4.16-1-15.js
 built-ins/Array/prototype/filter/15.4.4.20-1-15.js
 built-ins/Array/prototype/forEach/15.4.4.18-1-15.js
@@ -11,27 +11,6 @@ built-ins/Array/prototype/some/15.4.4.17-1-15.js
 # Function.prototype.toString
 built-ins/Function/prototype/toString/*.js
 
-# noop failure
-built-ins/ArrayBuffer/prototype/byteLength/detached-buffer.js
-
-# Engine262 bug: this.Reflect.apply(this.BigInt.asIntN, this.BigInt, [0, 0n]);
-# https://github.com/engine262/engine262/issues/148
-# built-ins/BigInt/asIntN/*.js
-# built-ins/BigInt/asUintN/*.js
-# built-ins/BigInt/prototype/valueOf/return.js
-# built-ins/BigInt/prototype/valueOf/cross-realm.js
-# built-ins/BigInt/call-value-of-when-to-string-present.js
-# built-ins/BigInt/constructor-empty-string.js
-# built-ins/BigInt/constructor-from-binary-string.js
-# built-ins/BigInt/constructor-from-decimal-string.js
-# built-ins/BigInt/constructor-from-hex-string.js
-# built-ins/BigInt/constructor-from-octal-string.js
-# built-ins/BigInt/constructor-integer.js
-# built-ins/BigInt/constructor-trailing-leading-spaces.js
-
-# Engine262 missing Array.prototype.at
-built-ins/Array/prototype/at/*.js
-
 # Asynchronous closure
 built-ins/AsyncFromSyncIteratorPrototype/**/*.js
 built-ins/AsyncFunction/**/*.js
@@ -40,3 +19,11 @@ built-ins/AsyncIteratorPrototype/**/*.js
 # Generator closure
 built-ins/AsyncGeneratorFunction/**/*.js
 built-ins/AsyncGeneratorPrototype/**/*.js
+
+# Noop Failure
+built-ins/Array/prototype/at/*.js
+built-ins/ArrayBuffer/prototype/byteLength/detached-buffer.js
+built-ins/FinalizationRegistry/**/*.js
+
+# Real Failure
+built-ins/Function/proto-from-ctor-realm.js

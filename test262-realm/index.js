@@ -58,7 +58,7 @@ module.exports = (options) => {
     realm.GlobalObject.DefineOwnProperty(new Engine262.Value("print"), Engine262.Descriptor({
       Value: new Engine262.Value((args) => {
         const arg = args.length === 0 ? Engine262.Value.undefined : args[0];
-        if (arg.stringValue) {
+        if (Engine262.Type(arg) === "String") {
           if (arg.stringValue() === "Test262:AsyncTestComplete") {
             options.success();
           } else if (arg.stringValue().startsWith("Test262:AsyncTestFailure:")) {
@@ -66,6 +66,8 @@ module.exports = (options) => {
           } else {
             console.log(arg.stringValue());
           }
+        } else {
+          console.log(Engine262.inspect(arg));
         }
         return Engine262.Value.undefined;
       }),
