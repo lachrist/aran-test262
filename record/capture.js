@@ -4,6 +4,7 @@ const Path = require("path");
 const Fs = require("fs");
 const Agents = require("./agents");
 const Minimist = require("minimist");
+const Util = require("util");
 
 const argv = Minimist(process.argv.slice(2));
 // const targets = [Path.join(__dirname, "test262", "harness", "assert.js")];
@@ -22,15 +23,32 @@ const nameof = (number) => {
 Fs.readdirSync(Path.join(__dirname, "dump")).forEach((filename) => {
   Fs.unlinkSync(Path.join(__dirname, "dump", filename));
 });
-const evalScript = (code) => {
+const evalScript = (code, specifier) => {
   Fs.writeFileSync(Path.join(__dirname, "dump", nameof(++counter)), code, "utf8");
-  Vm.runInThisContext(code);
+  return Vm.runInThisContext(code, {filename:specifier});
 };
 const agent = Agents.get(argv.agent)();
+global.print = (value) => {
+  console.log(Util.inspect(value));
+};
 global.$262 = {
-  __instrument__: agent.instrument,
-  evalScript};
+  createRealm () {
+    throw new global.Error("$262.createRealm() not implemented");
+  },
+  detachArrayBuffer () {
+    throw new global.Error("$262.detachArrayBuffer() not implemented");
+  },
+  evalScript,
+  gc () {
+    throw new global.Error("$262.gc() not implemented");
+  },
+  global: global,
+  get agent () {
+    throw new global.Error("262.agent not implemented");
+  },
+  instrument: agent.instrument.script
+};
 evalScript(agent.setup);
-const original = Fs.readFileSync(argv.target, "utf8");
-const instrumented = agent.instrument(original, "script", null, argv.target);
-evalScript(instrumented);
+let code = Fs.readFileSync(argv.target, "utf8");
+code = agent.instrument.script(code, argv.target);
+evalScript(code);

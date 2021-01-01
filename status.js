@@ -25,6 +25,12 @@
 // const ASYNC_PRINT = 6;
 // const ASYNC_MISSING = 7;
 
+exports.SUCCESS = "success";
+
+exports.SKIP = "skip";
+
+exports.HOST_FAILURE = "host-failure";
+
 exports.SETUP_FAILURE = "setup-failure";
 exports.HARNESS_FAILURE = "harness-failure";
 exports.CONTENT_FAILURE = "content-failure";

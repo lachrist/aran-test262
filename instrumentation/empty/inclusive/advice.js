@@ -44,13 +44,22 @@
                   [","])}${"\n"}) {${global_String(values[values.length - 1])}${"\n"}});`)),
             null,
             "function-call"));
-        if (new.target !== void 0) {
-          if (new.target.prototype !== null) {
-            if (typeof new.target.prototype === "object" || typeof new.target.prototype === "function") {
-              global_Reflect_setPrototypeOf(closure, new.target.prototype);
-            }
-          }
-        }
+        // https://www.ecma-international.org/ecma-262/11.0/index.html#sec-createdynamicfunction
+        // https://www.ecma-international.org/ecma-262/11.0/index.html#sec-getprototypefromconstructor
+        global_Reflect_setPrototypeOf(
+          closure,
+          (
+            (
+              new.target !== void 0 &&
+              (
+                (
+                  typeof new.target.prototype === "object" &&
+                  typeof new.target.prototype !== "null") ||
+                typeof new.target.prototype === "function")) ?
+            new.target.prototype :
+             // this does not work of if new.target comes from a different realm
+             // than the realm where this setup was evaluated :(
+            global_Function_prototype));
         return closure; };
       this.Function = new_global_Function;
       global_Reflect_defineProperty(

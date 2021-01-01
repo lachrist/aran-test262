@@ -1,0 +1,2 @@
+built-ins/Function/prototype/bind/proto-from-ctor-realm.js
+built-ins/Function/proto-from-ctor-realm.js

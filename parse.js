@@ -3,8 +3,8 @@
 const Path = require("path");
 const Fs = require("fs");
 const JsYaml = require("js-yaml");
-// b8793e95d9a41c3cf18e1f005c36d0630f2b2c4d
-module.exports = (path) => {
+
+module.exports = (path, map) => {
   const content = Fs.readFileSync(path, "utf8");
   const yamlStart = content.indexOf("/*---") + 5;
   const yamlEnd = content.indexOf("---*/", yamlStart);
@@ -15,14 +15,12 @@ module.exports = (path) => {
     return acc;
   }, {});
   attributes.includes = attributes.includes || [];
-  const normal = {
-    __proto__: null,
+  const raw = {
     path,
     attributes,
     content
   };
-  const strict = {
-    __proto__: null,
+  const cooked_use_strict = {
     path,
     attributes: Object.assign({}, attributes, {
       description: `${attributes.description} (Strict Mode)`
@@ -30,34 +28,27 @@ module.exports = (path) => {
     content: `"use strict";\n${content}`
   };
   if (attributes.flags.raw) {
-    return [{
-      __proto__: normal,
-      mode: "raw"
-    }];
+    return {
+      raw: raw
+    };
   }
   if (attributes.flags.module) {
-    return [{
-      __proto__: normal,
-      mode: "module"
-    }];
+    return {
+      module: raw
+    };
   }
   if (attributes.flags.noStrict) {
-    return [{
-      __proto__: normal,
-      mode: "normal"
-    }];
+    return {
+      normal: raw
+    };
   }
   if (attributes.flags.onlyStrict) {
-    return [{
-      __proto__: strict,
-      mode: "strict"
-    }];
+    return {
+      strict: cooked_use_strict
+    };
   }
-  return [{
-    __proto__: normal,
-    mode: "normal"
-  }, {
-    __proto__: strict,
-    mode: "strict"
-  }];
+  return {
+    normal: raw,
+    strict: cooked_use_strict
+  };
 };

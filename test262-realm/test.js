@@ -10,6 +10,7 @@ const realm = Test262Realm({
   success: () => { console.log(`success`); },
   failure: (message) => { console.log(`failure >> ${message}`); },
   instrument: {
+    setup: null,
     script: (code, specifier) => {
       console.log(`module >> ${specifier} >> ${code}`);
       return code;

@@ -11,6 +11,7 @@ const failure = (message) => { throw new global.Error(`Unhandled asynchronous te
 module.exports = (options) => {
   options = global.Object.assign({
     instrument: {
+      setup: null,
       script: identity,
       module: identity,
       eval: identity
@@ -155,6 +156,12 @@ module.exports = (options) => {
       }
       return new Engine262.Value(code);
     }));
+    if (options.instrument.setup !== null) {
+      const completion = realm.evaluateScript(options.instrument.setup, {specifier:"setup.js"});
+      if (completion instanceof Engine262.AbruptCompletion) {
+        throw new global.Error(`Setup failure: ${Engine262.inspect(completion)}`);
+      }
+    }
     return realm;
   });
 };

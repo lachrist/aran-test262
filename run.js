@@ -20,7 +20,7 @@ const cache = {__proto__:null};
 
 const identity = (any) => any;
 
-module.exports = (test, make_agent) => {
+module.exports = (test, kind, instrumenter) => {
   const specifier = Path.resolve(Env.TEST262, test.path);
   const includes = ["assert.js", "sta.js"].concat(test.attributes.includes);
   if (test.attributes.flags.async) {
@@ -31,16 +31,46 @@ module.exports = (test, make_agent) => {
       return (feature in features) ? [feature, features[feature]] : [feature];
     }) : []
   }));
-  const agent = make_agent();
+  const instrument = instrumenter();
+  // if (dump) {
+  //   let counter = 0;
+  //   const basename = Path.join(__dirname, "dump");
+  //   for (let filename of Fs.readdirSync(basename)) {
+  //     Fs.unlinkSync(Path.join(basename, filename));
+  //   }
+  //   const instrument = agent.instrument;
+  //   const wrap = (source) => (code, ...args) => {
+  //     counter++;
+  //     let id = global.String(counter);
+  //     while (id.length < 4) {
+  //       id = "0" + id;
+  //     }
+  //     const header = `/* ${global.JSON.stringify(args)} */`;
+  //     Fs.writeFileSync(Path.join(basename, `${id}-${source}.js`), `${header}${code}`, "utf8");
+  //     code = instrument[source](code, ...args);
+  //     Fs.writeFileSync(Path.join(basename, `${id}-${source}*.js`), `${header}${code}`, "utf8");
+  //     return code;
+  //   }
+  //   agent = {
+  //     setup: agent.setup,
+  //     enclave: agent.enclave,
+  //     instrument: {
+  //       module: wrap("module"),
+  //       script: wrap("script"),
+  //       eval: wrap("eval")
+  //     }
+  //   };
+  // }
   const promises = new Set();
   const modules = new Map();
   let asynchronous = global.undefined;
   const realm = Test262Realm({
-    instrument: agent.enclave ? {
+    instrument: kind === "exclusive" ? {
+      setup: instrument.setup,
       script: identity,
       module: identity,
-      eval: agent.instrument.eval
-    } : agent.instrument,
+      eval: instrument.eval
+    } : instrument,
     promises,
     success: () => {
       if (asynchronous === global.undefined) {
@@ -78,16 +108,8 @@ module.exports = (test, make_agent) => {
   //   code = old(code, source, serial),
   //   Fs.writeFileSync(Path.join(__dirname, "dump", `${counter}-instrumented.js`), code, "utf8"),
   //   code)) (instrument));
-  const result = realm.scope(() => {
+  const failure = realm.scope(() => {
     let completion;
-    // Setup //
-    completion = realm.evaluateScript(agent.setup, {specifier:"setup.js"});
-    if (completion instanceof Engine262.AbruptCompletion) {
-      return {
-        status: Status.SETUP_FAILURE,
-        completion: Engine262.inspect(completion),
-      };
-    }
     // Include //
     for (const include of includes) {
       if (!(include in cache)) {
@@ -110,7 +132,7 @@ module.exports = (test, make_agent) => {
     // Content //
     if (test.mode === "module") {
       try {
-        completion = realm.createSourceTextModule(specifier, agent.instrument.module(test.content, specifier));
+        completion = realm.createSourceTextModule(specifier, instrument.module(test.content, specifier));
       } catch (error) {
         if (error instanceof SyntaxError) {
           completion = Engine262.Throw("SyntaxError", "Raw", error.message);
@@ -132,7 +154,7 @@ module.exports = (test, make_agent) => {
       }
     } else {
       try {
-        completion = realm.evaluateScript(agent.instrument.script(test.content, specifier), {specifier});
+        completion = realm.evaluateScript(instrument.script(test.content, specifier), {specifier});
       } catch (error) {
         if (error instanceof SyntaxError) {
           completion = syntax_error_throw_completion(error.message);
@@ -187,11 +209,11 @@ module.exports = (test, make_agent) => {
     }
     return null;
   });
-  if (result === null && promises.size > 0) {
+  if (failure === null && promises.size > 0) {
     return {
       status: Status.PROMISE_PENDING,
       promises: Array.from(promises.values()).map((promise) => Engine262.inspect(promise))
     };
   }
-  return result;
+  return failure;
 };
