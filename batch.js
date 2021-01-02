@@ -17,14 +17,96 @@ const Run = require("./run.js");
 // Database //
 //////////////
 
-let database = new global.Map();
+let database = new global.Map([
+  ["CURRENT", 0]
+]);
 
 try {
-  const {current, } = 
   database = new global.Map(global.JSON.parse(Fs.readFileSync(Path.join(__dirname, "database.json"), "utf8")));
 } catch (error) {
   process.stderr.write("Failed to load the database: " + error.message + "\n");
 }
+
+//////////
+// Loop //
+//////////
+
+const current = database.get("CURRENT");
+
+let counter = 0;
+
+const loop = (iterator) => {
+  const step = iterator.next();
+  if (step.done) {
+    return terminate(null);
+  }
+  const specifier = Path.relative(Path.join(__dirname, "test262", "test"), step.value);
+  for (let [mode, test] of Object.entries(Parse(step.value))) {
+    abrupt: for (let kind of ["inclusive", "exclusive"]) {
+      counter++;
+      process.stdout.write(`${Chalk.blue(global.String(counter))} ${specifier} ${mode} ${kind}...`, "utf8");
+      let cache = null;
+      if (counter <= current) {
+        if (database.has(counter)) {
+          cache = database.get(counter).abrupt;
+        } else {
+          process.stdout.write(Chalk.green(` cache`) + "\n", "utf8");
+          continue abrupt;
+        }
+      }
+      for (let instrumentation of Instrumentation[kind]) {
+        if (instrumentation.skip.has(specifier)) {
+          database.set(counter, {
+            type: "SKIP",
+            specifier,
+            mode,
+            abrupt: instrumentation.name,
+            data: null
+          });
+          process.stdout.write(Chalk.yellow(` skip ${instrumentation.name}`) + "\n", "utf8");
+          continue abrupt;
+        }
+        if (instrumentation.name === cache) {
+          cache = null;
+        }
+        if (cache === null) {
+          try {
+            const failure = Run(test, kind, instrumentation.instrumenter);
+            if (failure !== null) {
+              database.set(counter, {
+                type: "FAILURE",
+                specifier,
+                mode,
+                abrupt: instrumentation.name,
+                data: failure
+              });
+              process.stdout.write(Chalk.red(` failure ${instrumentation.name} ${failure.status}`) + "\n", "utf8");
+              continue abrupt;
+            }
+          } catch (error) {
+            database.set(counter, {
+              type: "ERROR",
+              specifier,
+              mode,
+              abrupt: instrumentation.name,
+              data: {
+                name: error.name,
+                message: error.message,
+                stack: error.stack
+              }
+            });
+            process.stdout.write(Chalk.bgRed(` error ${instrumentation.name} ${error.stack}`) + "\n", "utf8");
+            continue abrupt;
+          }
+        }
+      }
+      database.delete(counter);
+      process.stdout.write(Chalk.green(` success`) + "\n", "utf8");
+    }
+  }
+  global.setImmediate(loop, iterator);
+};
+
 
 /////////////////
 // Termination //
@@ -32,6 +114,9 @@ try {
 
 const terminate = (error) => {
   try {
+    if (counter > current) {
+      database.set("CURRENT", counter);
+    }
     Fs.writeFileSync(Path.join(__dirname, "database.json"), global.JSON.stringify(global.Array.from(database.entries()), null, 2), "utf8");
     if (error === null) {
       return process.exit(0);
@@ -49,73 +134,8 @@ process.on("uncaughtException", terminate);
 
 process.on("SIGINT", () => terminate(null));
 
-//////////
-// Loop //
-//////////
+///////////
+// Start //
+///////////
 
-const loop = (iterator, counter) => {
-  const step = iterator.next();
-  if (step.done) {
-    return terminate(null);
-  }
-  const specifier = Path.relative(Path.join(__dirname, "test262", "test"), step.value);
-  for (let [mode, test] of Object.entries(Parse(step.value))) {
-    abrupt: for (let kind of ["inclusive", "exclusive"]) {
-      counter++;
-      const key = `${kind}/${mode}/${specifier}`;
-      process.stdout.write(`${Chalk.blue(global.String(counter))} ${specifier} ${mode} ${kind}...`, "utf8");
-      let reached = true;
-      let cache = null;
-      if (database.has(key)) {
-        if (database.get(key) === null) {
-          process.stdout.write(Chalk.green(" cache") + "\n", "utf8");
-          continue abrupt;
-        }
-        reached = false;
-        cache = database.get(key).name;
-      }
-      for (let instrumentation of Instrumentation[kind]) {
-        if (instrumentation.skip.has(specifier)) {
-          database.set(key, {
-            type: "SKIP",
-            name: instrumentation.name,
-            data: null
-          });
-          process.stdout.write(Chalk.yellow(` skip ${instrumentation.name}`) + "\n", "utf8");
-          continue abrupt;
-        }
-        reached = reached || instrumentation.name === cache;
-        if (reached) {
-          try {
-            const failure = Run(test, kind, instrumentation.instrumenter);
-            if (failure !== null) {
-              database.set(key, {
-                type: "FAILURE",
-                name: instrumentation.name,
-                data: failure
-              });
-              process.stdout.write(Chalk.red(` failure ${instrumentation.name} ${failure.status}`) + "\n", "utf8");
-              continue abrupt;
-            }
-          } catch (error) {
-            database.set(key, {
-              type: "ERROR",
-              name: instrumentation.name,
-              data: {
-                name: error.name,
-                message: error.message,
-              }
-            });
-            process.stdout.write(Chalk.bgRed(` error ${instrumentation.name} ${error.stack}`) + "\n", "utf8");
-            continue abrupt;
-          }
-        }
-      }
-      database.set(key, null);
-      process.stdout.write(Chalk.green(" pass") + "\n", "utf8");
-    }
-  }
-  global.setImmediate(loop, iterator, counter);
-};
-
-global.setImmediate(loop, Gather(Path.join(__dirname, "test262", "test")), 0);
+global.setImmediate(loop, Gather(Path.join(__dirname, "test262", "test")));
