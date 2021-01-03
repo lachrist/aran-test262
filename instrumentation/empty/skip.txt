@@ -9,9 +9,6 @@ built-ins/Array/prototype/some/15.4.4.17-1-15.js
 built-ins/Object/create/15.2.3.5-4-15.js
 built-ins/Object/defineProperties/15.2.3.7-2-16.js
 
-# Function.prototype.toString
-built-ins/Function/prototype/toString/*.js
-
 # Asynchronous closure && Generator closure
 built-ins/Array/from/iter-set-elem-prop-non-writable.js
 built-ins/AsyncFromSyncIteratorPrototype/**/*.js
@@ -19,5 +16,8 @@ built-ins/AsyncFunction/**/*.js
 built-ins/AsyncIteratorPrototype/**/*.js
 built-ins/AsyncGeneratorFunction/**/*.js
 built-ins/AsyncGeneratorPrototype/**/*.js
+built-ins/FinalizationRegistry/gc-has-one-chance-to-call-cleanupCallback.js
+built-ins/FinalizationRegistry/prototype/cleanupSome/return-undefined-with-gc.js
+built-ins/FinalizationRegistry/prototype/cleanupSome/return-undefined.js
 built-ins/GeneratorFunction/**/*.js
 built-ins/GeneratorPrototype/**/*.js

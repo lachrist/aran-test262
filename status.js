@@ -27,9 +27,7 @@
 
 exports.SUCCESS = "success";
 
-exports.SKIP = "skip";
-
-exports.HOST_FAILURE = "host-failure";
+exports.DISABLED_FEATURE = "disabled-feature";
 
 exports.SETUP_FAILURE = "setup-failure";
 exports.HARNESS_FAILURE = "harness-failure";

@@ -1,4 +1,8 @@
+# print(new Date(0).getTimezoneOffset());
+built-ins/Date/parse/without-utc-offset.js
 
-built-ins/Array/prototype/at/*.js
-built-ins/ArrayBuffer/prototype/byteLength/detached-buffer.js
-built-ins/FinalizationRegistry/**/*.js
+# new Date(NaN).setMonth(6);
+built-ins/Date/prototype/setMonth/this-value-invalid-date.js
+
+# Object.defineProperty(() => {}, "length", {value: Infinity}).bind();
+built-ins/Function/prototype/bind/instance-length-tointeger.js

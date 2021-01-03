@@ -5,35 +5,99 @@ const Path = require("path");
 const Fs = require("fs");
 const Util = require("util");
 const Minimist = require("minimist");
-const Agents = require("./agents");
+const Instrumentation = require("./instrumentation");
+const Engine262 = require(Path.join(__dirname, "node_modules", "@engine262", "engine262", "dist", "engine262.js"));
+const Test262Realm = require("./test262-realm");
 
 const argv = Minimist(process.argv.slice(2));
-const agent = Agents.get(argv.agent)();
-const target = Fs.readFileSync(argv.target, "utf8");
-global.print = (value) => {
-  console.log(Util.inspect(value));
-};
-global.$262 = {
-  createRealm () {
-    throw new global.Error("$262.createRealm() not implemented");
-  },
-  detachArrayBuffer () {
-    throw new global.Error("$262.detachArrayBuffer() not implemented");
-  },
-  evalScript (code, specifier) {
-    if (!agent.enclave) {
-      code = agent.instrument.script(code, specifier);
+
+const specifier = Path.resolve(process.cwd(), argv.target);
+
+const target = Fs.readFileSync(specifier, "utf8");
+
+const instrumentation = Instrumentation[argv.kind].find((instrumentation) => instrumentation.name === argv.instrumentation);
+
+const instrument = instrumentation.instrumenter();
+
+if (argv.host.includes("node")) {
+  
+  console.log("node");
+
+  global.print = (...values) => {
+    console.log(...values.map((value) => Util.inspect(values)));
+  };
+
+  global.$262 = {
+    createRealm () {
+      throw new global.Error("$262.createRealm() not implemented");
+    },
+    detachArrayBuffer () {
+      throw new global.Error("$262.detachArrayBuffer() not implemented");
+    },
+    evalScript (code, specifier) {
+      if (process.argv[3] === "inclusive") {
+        code = instrument.script(code, specifier);
+      }
+      return Vm.runInThisContext(code, {filename:specifier});
+    },
+    gc () {
+      throw new global.Error("$262.gc() not implemented");
+    },
+    global: global,
+    get agent () {
+      throw new global.Error("262.agent not implemented");
+    },
+    instrument: instrument.eval
+  };
+
+  Vm.runInThisContext(instrument.setup, {filename:"setup.js"});
+
+  Vm.runInThisContext(instrument.script(target, process.argv[2]), {filename:process.argv[2]});
+
+  delete global.print;
+  delete global.$262;
+
+}
+
+if (argv.host.includes("engine262")) {
+  
+  console.log("engine262");
+
+  Engine262.setSurroundingAgent(new Engine262.Agent({features:[]}));
+
+  const modules = new Map();
+
+  const realm = Test262Realm({
+    instrument: argv.kind === "exclusive" ? {
+      setup: instrument.setup,
+      script: (code) => code,
+      module: (code) => code,
+      eval: instrument.eval
+    } : instrument,
+    modules
+  });
+
+  realm.scope(() => {
+    let completion;
+    if (specifier.endsWith(".mjs")) {
+      completion = realm.createSourceTextModule(specifier, instrument.module(target, specifier));
+      if (!(completion instanceof Engine262.AbruptCompletion)) {
+        const module = completion;
+        modules.set(specifier, module);
+        completion = module.Link();
+        if (!(completion instanceof Engine262.AbruptCompletion)) {
+          completion = module.Evaluate();
+        }
+        if (!(completion instanceof Engine262.AbruptCompletion)) {
+          if (completion.PromiseState === "rejected") {
+            completion = Engine262.Throw(completion.PromiseResult);
+          }
+        }
+      }
+    } else {
+      completion = realm.evaluateScript(instrument.script(target, specifier), {specifier});
     }
-    return Vm.runInThisContext(code, {filename:specifier});
-  },
-  gc () {
-    throw new global.Error("$262.gc() not implemented");
-  },
-  global: global,
-  get agent () {
-    throw new global.Error("262.agent not implemented");
-  },
-  instrument: agent.instrument.eval
-};
-Vm.runInThisContext(agent.setup, {filename:"setup.js"});
-Vm.runInThisContext(agent.instrument.script(target, argv.target), {filename:argv.target});
+    console.log(Engine262.inspect(completion));
+  });
+  
+}

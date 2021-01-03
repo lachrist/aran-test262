@@ -2,35 +2,55 @@
 
 const Path = require("path");
 const Fs = require("fs");
-const Env = require("./env.js");
 const Status = require("./status.js");
-const Engine262 = require(Path.join(Env.ENGINE262, "dist", "engine262.js"));
+const Engine262 = require(Path.join(__dirname, "node_modules", "@engine262", "engine262", "dist", "engine262.js"));
 const Test262Realm = require("./test262-realm");
 
-let features = Path.join(Env.ENGINE262, "test", "test262", "features");
-features = Fs.readFileSync(features, "utf8");
-features = features.split("\n");
-features = features.filter((line) => line !== "");
-features = features.filter((line) => !line.startsWith("#"));
-features = features.filter((line) => !line.startsWith("-"));
-features = features.filter((line) => line.includes("="));
-features = features.map((line) => line.split("=").map((word) => word.trim()));
+const features = new global.Map();
+{
+  const path = Path.join(__dirname, "features.txt");
+  const content = Fs.readFileSync(path, "utf8");
+  let lines = content.split("\n");
+  lines = lines.filter((line) => line !== "");
+  lines = lines.filter((line) => !line.startsWith("#"));
+  lines.forEach((line) => {
+    if (line.startsWith("-")) {
+      features.set(line.substring(1).trim(), null);
+    } else {
+      const words = line.split("=");
+      features.set(words[0].trim(), words[1].trim());
+    }
+  });
+}
 
 const cache = {__proto__:null};
 
 const identity = (any) => any;
 
-module.exports = (test, kind, instrumenter) => {
-  const specifier = Path.resolve(Env.TEST262, test.path);
+module.exports = (specifier, test, kind, instrumenter) => {
   const includes = ["assert.js", "sta.js"].concat(test.attributes.includes);
   if (test.attributes.flags.async) {
     includes.unshift("doneprintHandle.js");
   }
-  Engine262.setSurroundingAgent(new Engine262.Agent({
-    features: test.attributes.features ? test.attributes.features.flatMap((feature) => {
-      return (feature in features) ? [feature, features[feature]] : [feature];
-    }) : []
-  }));
+  if (test.attributes.features) {
+    const array = ([]).concat(test.attributes.features);
+    for (let feature of test.attributes.features) {
+      if (features.has(feature)) {
+        if (features.get(feature) === null) {
+          return {
+            status: Status.DISABLED_FEATURE,
+            data: feature,
+            completion: null
+          };
+        } else {
+          array.push(features.get(feature));
+        }
+      }
+    }
+    Engine262.setSurroundingAgent(new Engine262.Agent({features:array}));
+  } else {
+    Engine262.setSurroundingAgent(new Engine262.Agent({features:[]}));
+  }
   const instrument = instrumenter();
   // if (dump) {
   //   let counter = 0;
@@ -71,6 +91,7 @@ module.exports = (test, kind, instrumenter) => {
       module: identity,
       eval: instrument.eval
     } : instrument,
+    modules,
     promises,
     success: () => {
       if (asynchronous === global.undefined) {
@@ -78,8 +99,8 @@ module.exports = (test, kind, instrumenter) => {
       } else {
         asynchronous = {
           status: Status.ASYNC_DUPLICATE,
-          head: null,
-          tail: asynchronous
+          data: null,
+          completion: null
         };
       }
     },
@@ -87,16 +108,14 @@ module.exports = (test, kind, instrumenter) => {
       if (asynchronous === global.undefined) {
         asynchronous = {
           status: Status.ASYNC_FAILURE,
-          message
+          data: message,
+          completion: null
         };
       } else {
         asynchronous = {
           status: Status.ASYNC_DUPLICATE,
-          head: {
-            status: Status.ASYNC_FAILURE,
-            message
-          },
-          tail: asynchronous
+          data: null,
+          completion: null
         };
       }
     }
@@ -108,24 +127,24 @@ module.exports = (test, kind, instrumenter) => {
   //   code = old(code, source, serial),
   //   Fs.writeFileSync(Path.join(__dirname, "dump", `${counter}-instrumented.js`), code, "utf8"),
   //   code)) (instrument));
-  const failure = realm.scope(() => {
+  return realm.scope(() => {
     let completion;
     // Include //
     for (const include of includes) {
       if (!(include in cache)) {
-        cache[include] = Fs.readFileSync(Path.join(Env.TEST262, "harness", include), "utf8");
+        cache[include] = Fs.readFileSync(Path.join(__dirname, "test262", "harness", include), "utf8");
       }
       // No harness file declares let/const/class variables.
       // So they do not polute the global declarative record.
       // Hence they do not need to be instrumented.
       completion = realm.evaluateScript(cache[include], {
-        specifier: Path.join(Env.TEST262, "harness", include)
+        specifier: Path.join(__dirname, "test262", "harness", include)
       });
       if (completion instanceof Engine262.AbruptCompletion) {
         return {
-          status: Status.INCLUDE_FAILURE,
-          completion: Engine262.inspect(completion),
-          include: include
+          status: Status.HARNESS_FAILURE,
+          data: include,
+          completion: Engine262.inspect(completion)
         };
       }
     }
@@ -185,35 +204,49 @@ module.exports = (test, kind, instrumenter) => {
         }
         return {
           status: Status.WRONG_NEGATIVE,
+          data: null,
           completion: Engine262.inspect(completion)
         };
       }
       return {
         status: Status.CONTENT_FAILURE,
+        data: null,
         completion: Engine262.inspect(completion)
       };
     }
     // Teardown //
     if (test.attributes.flags.async) {
       if (asynchronous === global.undefined) {
-        return {satus: Status.ASYNC_MISSING};
+        return {
+          satus: Status.ASYNC_MISSING,
+          completion: null,
+          data: null
+        };
       }
       return asynchronous;
     } else {
       if (asynchronous !== global.undefined) {
-        return {status:Status.ASYNC_PRESENT};
+        return {
+          status:Status.ASYNC_PRESENT,
+          data: null,
+          completion: null
+        };
       }
     }
     if (test.attributes.negative) {
-      return {status: Status.MISSING_NEGATIVE};
+      return {
+        status: Status.MISSING_NEGATIVE,
+        data: null,
+        completion: null
+      };
+    }
+    if (promises.size > 0) {
+      return {
+        status: Status.PROMISE_PENDING,
+        data: Array.from(promises.values()).map((promise) => Engine262.inspect(promise)).join(", "),
+        completion: null
+      };
     }
     return null;
   });
-  if (failure === null && promises.size > 0) {
-    return {
-      status: Status.PROMISE_PENDING,
-      promises: Array.from(promises.values()).map((promise) => Engine262.inspect(promise))
-    };
-  }
-  return failure;
 };

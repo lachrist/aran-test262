@@ -14,11 +14,12 @@ const Parse = require("./parse.js");
 
 const cache = {
   __proto__: null,
-  CACHE: Chalk.blue("cache  "),
-  SUCCESS: Chalk.green("success"),
-  SKIP: Chalk.yellow("skip   "),
-  FAILURE: Chalk.red("failure"),
-  ERROR: Chalk.bgRed("error  "),
+  CACHE: Chalk.blue("cache   "),
+  SUCCESS: Chalk.green("success "),
+  DISABLED: Chalk.yellow("disabled"),
+  SKIP: Chalk.yellow("skip    "),
+  FAILURE: Chalk.red("failure "),
+  ERROR: Chalk.bgRed("error   "),
 };
 
 const display = (mode, kind, type) => {
@@ -123,7 +124,9 @@ global.setImmediate(loop);
 /////////////////
 
 const save = () => {
-  database.set("CURRENT", counter);
+  if (counter > current) {
+    database.set("CURRENT", counter);
+  }
   Fs.writeFileSync(Path.join(__dirname, "database.json"), global.JSON.stringify(global.Array.from(database.entries()), null, 2), "utf8");
 };
 

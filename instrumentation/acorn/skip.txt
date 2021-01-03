@@ -1,0 +1,2 @@
+# Function.prototype.toString
+built-ins/Function/prototype/toString/*.js
