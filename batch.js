@@ -1,17 +1,29 @@
 "use strict";
-global.Error.stackTraceLimit = 1/0;
 
+const ChildProcess = require("child_process");
 const Path = require("path");
 const Fs = require("fs");
 const Util = require("util");
 const Chalk = require("chalk");
-const Minimist = require("minimist");
-
-const Env = require("./env.js");
 const Gather = require("./gather.js");
-const Instrumentation = require("./instrumentation");
 const Parse = require("./parse.js");
-const Run = require("./run.js");
+
+////////////
+// Helper //
+////////////
+
+const cache = {
+  __proto__: null,
+  CACHE: Chalk.blue("cache  "),
+  SUCCESS: Chalk.green("success"),
+  SKIP: Chalk.yellow("skip   "),
+  FAILURE: Chalk.red("failure"),
+  ERROR: Chalk.bgRed("error  "),
+};
+
+const display = (mode, kind, type) => {
+  process.stdout.write(` | ${kind}/${mode.padEnd(6, " ")} ${cache[type]}`, "utf8");
+}
 
 //////////////
 // Database //
@@ -27,115 +39,104 @@ try {
   process.stderr.write("Failed to load the database: " + error.message + "\n");
 }
 
+const current = database.get("CURRENT");
+
+///////////
+// State //
+///////////
+
+const handler = ({type, kind, mode, specifier, abrupt, data}) => {
+  if (database === null) {
+    return null;
+  }
+  const key = `${global.String(counter)}/${mode}/${kind}`;
+  if (type === "SUCCESS") {
+    database.delete(key);
+  } else {
+    database.set(key, {type, specifier, abrupt, data});
+  }
+  display(mode, kind, type);
+  concurrent--;
+  if (concurrent === 0) {
+    global.setImmediate(loop);
+  }
+};
+
+let concurrent = 0;
+
+const workers = [1, 2, 3, 4].map(() => {
+  const worker = ChildProcess.fork(Path.join(__dirname, "batch-worker.js"));
+  worker.on("message", handler);
+  return worker;
+});
+
+let counter = 0;
+
+const iterator = Gather(Path.join(__dirname, "test262", "test"));
+
 //////////
 // Loop //
 //////////
 
-const current = database.get("CURRENT");
-
-let counter = 0;
-
-const loop = (iterator) => {
+const loop = () => {
+  process.stdout.write("\n", "utf8");
+  if (database === null) {
+    return null;
+  }
   const step = iterator.next();
   if (step.done) {
-    return terminate(null);
-  }
-  const specifier = Path.relative(Path.join(__dirname, "test262", "test"), step.value);
-  for (let [mode, test] of Object.entries(Parse(step.value))) {
-    abrupt: for (let kind of ["inclusive", "exclusive"]) {
-      counter++;
-      process.stdout.write(`${Chalk.blue(global.String(counter))} ${specifier} ${mode} ${kind}...`, "utf8");
-      let cache = null;
-      if (counter <= current) {
-        if (database.has(counter)) {
-          cache = database.get(counter).abrupt;
-        } else {
-          process.stdout.write(Chalk.green(` cache`) + "\n", "utf8");
-          continue abrupt;
-        }
-      }
-      for (let instrumentation of Instrumentation[kind]) {
-        if (instrumentation.skip.has(specifier)) {
-          database.set(counter, {
-            type: "SKIP",
-            specifier,
-            mode,
-            abrupt: instrumentation.name,
-            data: null
-          });
-          process.stdout.write(Chalk.yellow(` skip ${instrumentation.name}`) + "\n", "utf8");
-          continue abrupt;
-        }
-        if (instrumentation.name === cache) {
-          cache = null;
-        }
-        if (cache === null) {
-          try {
-            const failure = Run(test, kind, instrumentation.instrumenter);
-            if (failure !== null) {
-              database.set(counter, {
-                type: "FAILURE",
-                specifier,
-                mode,
-                abrupt: instrumentation.name,
-                data: failure
-              });
-              process.stdout.write(Chalk.red(` failure ${instrumentation.name} ${failure.status}`) + "\n", "utf8");
-              continue abrupt;
-            }
-          } catch (error) {
-            database.set(counter, {
-              type: "ERROR",
-              specifier,
-              mode,
-              abrupt: instrumentation.name,
-              data: {
-                name: error.name,
-                message: error.message,
-                stack: error.stack
-              }
-            });
-            process.stdout.write(Chalk.bgRed(` error ${instrumentation.name} ${error.stack}`) + "\n", "utf8");
-            continue abrupt;
-          }
-        }
-      }
-      database.delete(counter);
-      process.stdout.write(Chalk.green(` success`) + "\n", "utf8");
+    save();
+    for (let worker of workers) {
+      worker.kill("SIGINT");
     }
   }
-  global.setImmediate(loop, iterator);
+  counter++;
+  const specifier = Path.relative(Path.join(__dirname, "test262", "test"), step.value);
+  process.stdout.write(`${global.String(counter).padStart(6, "0")} ${specifier.padEnd(80, " ")}`, "utf8");
+  for (let [mode, test] of Object.entries(Parse(step.value))) {
+    for (let kind of ["inclusive", "exclusive"]) {
+      const key = `${global.String(counter)}/${mode}/${kind}`;
+      if ((counter < current) && !database.has(key)) {
+        display(mode, kind, "CACHE");
+      } else {
+        const cache = database.has(key) ? database.get(key).abrupt : null;
+        workers[concurrent].send({
+          mode,
+          specifier,
+          test,
+          kind,
+          cache
+        });
+        concurrent++;
+      }
+    }
+  }
+  if (concurrent === 0) {
+    global.setImmediate(loop);
+  }
 };
 
+global.setImmediate(loop);
 
 /////////////////
 // Termination //
 /////////////////
 
-const terminate = (error) => {
-  try {
-    if (counter > current) {
-      database.set("CURRENT", counter);
-    }
-    Fs.writeFileSync(Path.join(__dirname, "database.json"), global.JSON.stringify(global.Array.from(database.entries()), null, 2), "utf8");
-    if (error === null) {
-      return process.exit(0);
-    } else {
-      process.stderr.write(error.stack + "\n");
-    }
-  } catch (error) {
-    process.stderr.write("Termination error: " + String(error));
-  } finally {
-    process.exit(error === null ? 0 : 1);
-  }
+const save = () => {
+  database.set("CURRENT", counter);
+  Fs.writeFileSync(Path.join(__dirname, "database.json"), global.JSON.stringify(global.Array.from(database.entries()), null, 2), "utf8");
 };
 
-process.on("uncaughtException", terminate);
+process.on("SIGINT", () => {
+  save();
+  database = null;
+  for (let worker of workers) {
+    worker.kill();
+  }
+});
 
-process.on("SIGINT", () => terminate(null));
-
-///////////
-// Start //
-///////////
-
-global.setImmediate(loop, Gather(Path.join(__dirname, "test262", "test")));
+process.on("uncaughtException", (error) => {
+  save();
+  Fs.writeSync(process.stderr.fd, error.stack);
+  process.exit(1);
+});

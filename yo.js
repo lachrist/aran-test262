@@ -1,43 +1,29 @@
-// Copyright (C) 2020 Alexey Shvayka. All rights reserved.
+// Copyright (C) 2016 the V8 project authors. All rights reserved.
 // This code is governed by the BSD license found in the LICENSE file.
-
 /*---
-esid: sec-array.from
-description: >
-  Non-writable properties are overwritten by CreateDataProperty.
-  (result object's "0" is non-writable, items is iterable)
+esid: sec-array.of
+description: Default [[Prototype]] value derived from realm of the constructor
 info: |
-  Array.from ( items [ , mapfn [ , thisArg ] ] )
+    [...]
+    4. If IsConstructor(C) is true, then
+       a. Let A be ? Construct(C, « len »).
+    [...]
 
-  [...]
-  5. If usingIterator is not undefined, then
+    9.1.14 GetPrototypeFromConstructor
+
     [...]
-    e. Repeat,
-      [...]
-      viii. Let defineStatus be CreateDataPropertyOrThrow(A, Pk, mappedValue).
+    3. Let proto be ? Get(constructor, "prototype").
+    4. If Type(proto) is not Object, then
+       a. Let realm be ? GetFunctionRealm(constructor).
+       b. Let proto be realm's intrinsic object named intrinsicDefaultProto.
     [...]
-features: [generators]
-includes: [propertyHelper.js]
+features: [cross-realm]
 ---*/
 
-var items = function* () {
-  yield 2;
-};
+var other = $262.createRealm().global;
+var C = new other.Function();
+C.prototype = null;
 
-var A = function(_length) {
-  Object.defineProperty(this, "0", {
-    value: 1,
-    writable: false,
-    enumerable: false,
-    configurable: true,
-  });
-};
+var a = Array.of.call(C, 1, 2, 3);
 
-var res = Array.from.call(A, items());
-
-verifyProperty(res, "0", {
-  value: 2,
-  writable: true,
-  enumerable: true,
-  configurable: true,
-});
+assert.sameValue(Object.getPrototypeOf(a), other.Object.prototype);
