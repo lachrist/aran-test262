@@ -6,3 +6,14 @@ built-ins/Date/prototype/setMonth/this-value-invalid-date.js
 
 # Object.defineProperty(() => {}, "length", {value: Infinity}).bind();
 built-ins/Function/prototype/bind/instance-length-tointeger.js
+
+# print(("uid=31").replace(/(uid=)(\d+)/, "$1115"));
+built-ins/String/prototype/replace/S15.5.4.11_A3_T1.js
+built-ins/String/prototype/replace/S15.5.4.11_A3_T2.js
+built-ins/String/prototype/replace/S15.5.4.11_A3_T3.js
+
+# Slow AF
+built-ins/Function/prototype/toString/built-in-function-object.js
+built-ins/RegExp/CharacterClassEscapes/*.js
+built-ins/RegExp/character-class-escape-non-whitespace.js
+built-ins/RegExp/property-escapes/generated/*.js

@@ -35,6 +35,7 @@ exports.CONTENT_FAILURE = "content-failure";
 
 exports.NEGATIVE_MISSING = "negative-messing";
 exports.NEGATIVE_INVALID = "negative-invalid";
+exports.NEGATIVE_UNEXPECTED = "negative-unexpected";
 
 exports.ASYNC_FAILURE = "async-failure";
 exports.ASYNC_MISSING = "async-missing";

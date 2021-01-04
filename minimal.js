@@ -11,20 +11,26 @@ const Test262Realm = require("./test262-realm");
 
 const argv = Minimist(process.argv.slice(2));
 
-const specifier = Path.resolve(process.cwd(), argv.target);
+const test = {
+  path: Path.resolve(process.cwd(), argv.target),
+  source: argv.target.endsWith(".mjs") ? "module" : "script", 
+  content: Fs.readFileSync(argv.target, "utf8")
+};
 
-const target = Fs.readFileSync(specifier, "utf8");
+const path = Path.resolve(process.cwd(), argv.target);
+
+const target = Fs.readFileSync(path, "utf8");
 
 const instrumentation = Instrumentation[argv.kind].find((instrumentation) => instrumentation.name === argv.instrumentation);
 
 const instrument = instrumentation.instrumenter();
 
-if (argv.host.includes("node")) {
+if (!("host" in argv) || argv.host.includes("node")) {
   
   console.log("node");
 
   global.print = (...values) => {
-    console.log(...values.map((value) => Util.inspect(values)));
+    console.log(...values.map((value) => Util.inspect(value)));
   };
 
   global.$262 = {
@@ -59,7 +65,7 @@ if (argv.host.includes("node")) {
 
 }
 
-if (argv.host.includes("engine262")) {
+if (!("host" in argv) || argv.host.includes("engine262")) {
   
   console.log("engine262");
 
@@ -79,11 +85,11 @@ if (argv.host.includes("engine262")) {
 
   realm.scope(() => {
     let completion;
-    if (specifier.endsWith(".mjs")) {
-      completion = realm.createSourceTextModule(specifier, instrument.module(target, specifier));
+    if (test.source === "module") {
+      completion = realm.createSourceTextModule(test.path, instrument.module(target, test.path));
       if (!(completion instanceof Engine262.AbruptCompletion)) {
         const module = completion;
-        modules.set(specifier, module);
+        modules.set(test.path, module);
         completion = module.Link();
         if (!(completion instanceof Engine262.AbruptCompletion)) {
           completion = module.Evaluate();
@@ -95,7 +101,7 @@ if (argv.host.includes("engine262")) {
         }
       }
     } else {
-      completion = realm.evaluateScript(instrument.script(target, specifier), {specifier});
+      completion = realm.evaluateScript(instrument.script(target, test.path), {specifier:test.path});
     }
     console.log(Engine262.inspect(completion));
   });

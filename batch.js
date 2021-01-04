@@ -14,16 +14,16 @@ const Parse = require("./parse.js");
 
 const cache = {
   __proto__: null,
-  CACHE: Chalk.blue("cache   "),
-  SUCCESS: Chalk.green("success "),
-  DISABLED: Chalk.yellow("disabled"),
-  SKIP: Chalk.yellow("skip    "),
-  FAILURE: Chalk.red("failure "),
-  ERROR: Chalk.bgRed("error   "),
+  CACHE: Chalk.blue("done"),
+  SUCCESS: Chalk.green("pass"),
+  DISABLED: Chalk.yellow("off "),
+  SKIP: Chalk.yellow("skip"),
+  FAILURE: Chalk.red("fail"),
+  ERROR: Chalk.bgRed("err "),
 };
 
 const display = (mode, kind, type) => {
-  process.stdout.write(` | ${kind}/${mode.padEnd(6, " ")} ${cache[type]}`, "utf8");
+  process.stdout.write(` | ${kind.substring(0, 4)}/${mode.padEnd(6, " ")} ${cache[type]}`, "utf8");
 }
 
 //////////////
@@ -46,15 +46,20 @@ const current = database.get("CURRENT");
 // State //
 ///////////
 
-const handler = ({type, kind, mode, specifier, abrupt, data}) => {
+const handler = ({mode, kind, type, path, abrupt, data}) => {
+  const key = `${global.String(counter)}/${mode}/${kind}`;
   if (database === null) {
     return null;
   }
-  const key = `${global.String(counter)}/${mode}/${kind}`;
   if (type === "SUCCESS") {
     database.delete(key);
   } else {
-    database.set(key, {type, specifier, abrupt, data});
+    database.set(key, {
+      type,
+      path: Path.relative(Path.join(__dirname, "test262", "test"), path),
+      abrupt,
+      data
+    });
   }
   display(mode, kind, type);
   concurrent--;
@@ -92,9 +97,14 @@ const loop = () => {
     }
   }
   counter++;
-  const specifier = Path.relative(Path.join(__dirname, "test262", "test"), step.value);
-  process.stdout.write(`${global.String(counter).padStart(6, "0")} ${specifier.padEnd(80, " ")}`, "utf8");
-  for (let [mode, test] of Object.entries(Parse(step.value))) {
+  {
+    let specifier = Path.relative(Path.join(__dirname, "test262", "test"), step.value);
+    if (specifier.length > 90) {
+      specifier = "..." + specifier.substring(specifier.length - 87, specifier.length)
+    }
+    process.stdout.write(`${global.String(counter).padStart(6, "0")} ${specifier.padEnd(90, " ")}`, "utf8");
+  }
+  for (let {mode, test} of Parse(step.value)) {
     for (let kind of ["inclusive", "exclusive"]) {
       const key = `${global.String(counter)}/${mode}/${kind}`;
       if ((counter < current) && !database.has(key)) {
@@ -103,7 +113,6 @@ const loop = () => {
         const cache = database.has(key) ? database.get(key).abrupt : null;
         workers[concurrent].send({
           mode,
-          specifier,
           test,
           kind,
           cache

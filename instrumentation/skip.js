@@ -12,6 +12,6 @@ module.exports = (kind, name) => new global.Set([
 const common = (path) => {
   let lines = Fs.readFileSync(path, "utf8").split("\n");
   lines = lines.filter((line) => line !== "" && !line.startsWith("#"));
-  const paths = lines.flatMap((line) => Glob.sync(Path.join(__dirname, "..", "test262", "test", line)));
-  return paths.map((path) => Path.relative(Path.join(__dirname, "..", "test262", "test"), path));
+  return lines.flatMap((line) => Glob.sync(Path.join(__dirname, "..", "test262", "test", line)));
+  // return paths.map((path) => Path.relative(Path.join(__dirname, "..", "test262", "test"), path));
 };

@@ -16,7 +16,7 @@
         typeof value === "string" ?
         global_eval(
           $262.instrument(value, null, "indirect-eval-call")) :
-        code);
+        value);
       global_Reflect_defineProperty(
         this.eval,
         "name",

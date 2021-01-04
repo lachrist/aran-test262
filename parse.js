@@ -9,7 +9,7 @@ const accumulator = (object, flag) => {
   return object;
 };
 
-module.exports = (path, map) => {
+module.exports = (path) => {
   const content = Fs.readFileSync(path, "utf8");
   const yamlStart = content.indexOf("/*---") + 5;
   const yamlEnd = content.indexOf("---*/", yamlStart);
@@ -17,38 +17,54 @@ module.exports = (path, map) => {
   const attributes = JsYaml.load(yaml);
   attributes.flags = (attributes.flags || []).reduce(accumulator, {});
   attributes.includes = attributes.includes || [];
-  const raw = {
-    attributes,
-    content
-  };
-  const cooked_use_strict = {
-    attributes: Object.assign({}, attributes, {
-      description: `${attributes.description} (Strict Mode)`
-    }),
-    content: `"use strict";\n${content}`
-  };
   if (attributes.flags.raw) {
-    return {
-      raw: raw
-    };
+    return [{
+      mode: "raw",
+      test: {
+        path,
+        source: "script",
+        attributes,
+        content
+      }
+    }];
   }
   if (attributes.flags.module) {
-    return {
-      module: raw
-    };
+    return [{
+      mode: "module",
+      test: {
+        path,
+        source: "module",
+        attributes,
+        content
+      }
+    }];
   }
+  const normal = {
+    mode: "normal",
+    test: {
+      path,
+      mode: "normal",
+      source: "normal",
+      attributes,
+      content
+    }
+  };
+  const strict = {
+    mode: "strict",
+    test: {
+      path,
+      source: "script",
+      attributes: Object.assign({}, attributes, {
+        description: `${attributes.description} (Strict Mode)`
+      }),
+      content: `"use strict";\n${content}`
+    }
+  };
   if (attributes.flags.noStrict) {
-    return {
-      normal: raw
-    };
+    return [normal];
   }
   if (attributes.flags.onlyStrict) {
-    return {
-      strict: cooked_use_strict
-    };
+    return [strict];
   }
-  return {
-    normal: raw,
-    strict: cooked_use_strict
-  };
+  return [normal, strict];
 };

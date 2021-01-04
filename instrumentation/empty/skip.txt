@@ -8,6 +8,8 @@ built-ins/Array/prototype/reduceRight/15.4.4.22-1-15.js
 built-ins/Array/prototype/some/15.4.4.17-1-15.js
 built-ins/Object/create/15.2.3.5-4-15.js
 built-ins/Object/defineProperties/15.2.3.7-2-16.js
+built-ins/Object/prototype/toString/Object.prototype.toString.call-arguments.js
+built-ins/String/prototype/trim/15.5.4.20-2-51.js
 
 # Asynchronous closure && Generator closure
 built-ins/Array/from/iter-set-elem-prop-non-writable.js
@@ -21,3 +23,20 @@ built-ins/FinalizationRegistry/prototype/cleanupSome/return-undefined-with-gc.js
 built-ins/FinalizationRegistry/prototype/cleanupSome/return-undefined.js
 built-ins/GeneratorFunction/**/*.js
 built-ins/GeneratorPrototype/**/*.js
+built-ins/Object/prototype/toString/proxy-function-async.js
+built-ins/Object/prototype/toString/proxy-function.js
+built-ins/Object/prototype/toString/symbol-tag-non-str-builtin.js
+built-ins/Object/prototype/toString/symbol-tag-non-str-proxy-function.js
+built-ins/Object/seal/seal-asyncarrowfunction.js
+built-ins/Object/seal/seal-asyncfunction.js
+built-ins/Object/seal/seal-asyncgeneratorfunction.js
+built-ins/Object/seal/seal-generatorfunction.js
+built-ins/Proxy/apply/trap-is-undefined-target-is-proxy.js
+
+# TODO
+# I understand why this fails for inclusive but it also fails for exclusive...
+built-ins/Proxy/construct/trap-is-undefined-proto-from-newtarget-realm.js
+built-ins/ThrowTypeError/forbidden-arguments.js
+# print(("fox").match(/(?<𝑓𝑜𝑥>fox)/));
+built-ins/RegExp/named-groups/non-unicode-property-names-valid.js
+

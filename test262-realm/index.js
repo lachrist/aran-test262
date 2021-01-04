@@ -64,7 +64,7 @@ module.exports = (options) => {
           } else if (args[0].stringValue().startsWith("Test262:AsyncTestFailure:")) {
             options.failure(args[0].stringValue());
           } else {
-            console.log(args[0].stringValue());
+            console.log(...args.map((arg) => Engine262.inspect(arg)));
           }
         } else {
           console.log(...args.map((arg) => Engine262.inspect(arg)));

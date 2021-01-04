@@ -1,4 +1,5 @@
 "use strict";
+global.Error.stackTraceLimit = 1/0;
 
 const Path = require("path");
 const Fs = require("fs");
@@ -27,7 +28,7 @@ const cache = {__proto__:null};
 
 const identity = (any) => any;
 
-module.exports = (specifier, test, kind, instrumenter) => {
+module.exports = (test, kind, instrumenter) => {
   const includes = ["assert.js", "sta.js"].concat(test.attributes.includes);
   if (test.attributes.flags.async) {
     includes.unshift("doneprintHandle.js");
@@ -52,35 +53,6 @@ module.exports = (specifier, test, kind, instrumenter) => {
     Engine262.setSurroundingAgent(new Engine262.Agent({features:[]}));
   }
   const instrument = instrumenter();
-  // if (dump) {
-  //   let counter = 0;
-  //   const basename = Path.join(__dirname, "dump");
-  //   for (let filename of Fs.readdirSync(basename)) {
-  //     Fs.unlinkSync(Path.join(basename, filename));
-  //   }
-  //   const instrument = agent.instrument;
-  //   const wrap = (source) => (code, ...args) => {
-  //     counter++;
-  //     let id = global.String(counter);
-  //     while (id.length < 4) {
-  //       id = "0" + id;
-  //     }
-  //     const header = `/* ${global.JSON.stringify(args)} */`;
-  //     Fs.writeFileSync(Path.join(basename, `${id}-${source}.js`), `${header}${code}`, "utf8");
-  //     code = instrument[source](code, ...args);
-  //     Fs.writeFileSync(Path.join(basename, `${id}-${source}*.js`), `${header}${code}`, "utf8");
-  //     return code;
-  //   }
-  //   agent = {
-  //     setup: agent.setup,
-  //     enclave: agent.enclave,
-  //     instrument: {
-  //       module: wrap("module"),
-  //       script: wrap("script"),
-  //       eval: wrap("eval")
-  //     }
-  //   };
-  // }
   const promises = new Set();
   const modules = new Map();
   let asynchronous = global.undefined;
@@ -120,13 +92,6 @@ module.exports = (specifier, test, kind, instrumenter) => {
       }
     }
   });
-  // let counter = 0;
-  // instrument = (((old) => (code, source, serial, specifier) => (
-  //   console.log("instrumenting", ++counter, specifier, source, serial),
-  //   Fs.writeFileSync(Path.join(__dirname, "dump", `${counter}-original.js`), code, "utf8"),
-  //   code = old(code, source, serial),
-  //   Fs.writeFileSync(Path.join(__dirname, "dump", `${counter}-instrumented.js`), code, "utf8"),
-  //   code)) (instrument));
   return realm.scope(() => {
     let completion;
     // Include //
@@ -149,18 +114,19 @@ module.exports = (specifier, test, kind, instrumenter) => {
       }
     }
     // Content //
-    if (test.mode === "module") {
+    if (test.source === "module") {
       try {
-        completion = realm.createSourceTextModule(specifier, instrument.module(test.content, specifier));
+        completion = realm.createSourceTextModule(test.path, instrument.module(test.content, test.path));
       } catch (error) {
         if (error instanceof SyntaxError) {
           completion = Engine262.Throw("SyntaxError", "Raw", error.message);
+        } else {
+          throw error;
         }
-        throw error;
       }
       if (!(completion instanceof Engine262.AbruptCompletion)) {
         const module = completion;
-        modules.set(specifier, module);
+        modules.set(test.path, module);
         completion = module.Link();
         if (!(completion instanceof Engine262.AbruptCompletion)) {
           completion = module.Evaluate();
@@ -173,12 +139,13 @@ module.exports = (specifier, test, kind, instrumenter) => {
       }
     } else {
       try {
-        completion = realm.evaluateScript(instrument.script(test.content, specifier), {specifier});
+        completion = realm.evaluateScript(instrument.script(test.content, test.path), {specifier:test.path});
       } catch (error) {
         if (error instanceof SyntaxError) {
-          completion = syntax_error_throw_completion(error.message);
+          completion = Engine262.Throw("SyntaxError", "Raw", error.message);
+        } else {
+          throw error;
         }
-        throw error;
       }
     }
     if (completion instanceof Engine262.AbruptCompletion) {
@@ -190,11 +157,11 @@ module.exports = (specifier, test, kind, instrumenter) => {
             const descriptor = error.Prototype.properties.get(new Engine262.Value("constructor"));
             if (descriptor && Engine262.IsDataDescriptor(descriptor)) {
               const constructor = descriptor.Value;
-              if (Engine262.Type(constructor) === "Object" && Engine.IsCallable(constructor) === Engine262.Value.true) {
+              if (Engine262.Type(constructor) === "Object" && Engine262.IsCallable(constructor) === Engine262.Value.true) {
                 const descriptor = constructor.properties.get(new Engine262.Value("name"));
                 if (descriptor && Engine262.IsDataDescriptor(descriptor)) {
                   const name = descriptor.Value;
-                  if (Engine262.Type(name) === "string" && name.stringValue() === test.attributes.negative.type) {
+                  if (Engine262.Type(name) === "String" && name.stringValue() === test.attributes.negative.type) {
                     return null;
                   }
                 }
@@ -203,7 +170,7 @@ module.exports = (specifier, test, kind, instrumenter) => {
           }
         }
         return {
-          status: Status.WRONG_NEGATIVE,
+          status: Status.NEGATIVE_UNEXPECTED,
           data: null,
           completion: Engine262.inspect(completion)
         };
@@ -240,13 +207,16 @@ module.exports = (specifier, test, kind, instrumenter) => {
         completion: null
       };
     }
-    if (promises.size > 0) {
-      return {
-        status: Status.PROMISE_PENDING,
-        data: Array.from(promises.values()).map((promise) => Engine262.inspect(promise)).join(", "),
-        completion: null
-      };
-    }
+    // Unhandled promise rejection should not fail the test:
+    // https://www.ecma-international.org/ecma-262/#sec-host-promise-rejection-tracker
+    //
+    // if (promises.size > 0) {
+    //   return {
+    //     status: Status.PROMISE_PENDING,
+    //     data: Array.from(promises.values()).map((promise) => Engine262.inspect(promise)).join(", "),
+    //     completion: null
+    //   };
+    // }
     return null;
   });
 };
