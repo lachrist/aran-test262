@@ -1,12 +1,27 @@
 "use strict";
 
 const ChildProcess = require("child_process");
+const Minimist = require("minimist");
 const Path = require("path");
 const Fs = require("fs");
 const Util = require("util");
 const Chalk = require("chalk");
-const Gather = require("./gather.js");
 const Parse = require("./parse.js");
+
+const argv = global.Object.assign({
+  __proto__: null,
+  database: null,
+  target: null
+}, Minimist(process.argv.slice(2)));
+
+if (argv.target === null) {
+  process.stdout.write("Usage: node batch.js --target path/to/test262/source[.js] [--database path/to/database.json]\n", "utf8");
+  process.exit(1);
+}
+
+argv.target = Path.resolve(argv.target);
+
+const home = Fs.lstatSync(argv.target).isFile() ? Path.dirname(argv.target) : argv.target;
 
 ////////////
 // Helper //
@@ -34,10 +49,12 @@ let database = new global.Map([
   ["CURRENT", 0]
 ]);
 
-try {
-  database = new global.Map(global.JSON.parse(Fs.readFileSync(Path.join(__dirname, "database.json"), "utf8")));
-} catch (error) {
-  process.stderr.write("Failed to load the database: " + error.message + "\n");
+if (argv.database !== null) {
+  try {
+    database = new global.Map(global.JSON.parse(Fs.readFileSync(argv.database, "utf8")));
+  } catch (error) {
+    process.stderr.write("Failed to load the database: " + error.message + "\n");
+  }
 }
 
 const current = database.get("CURRENT");
@@ -56,7 +73,7 @@ const handler = ({mode, kind, type, path, abrupt, data}) => {
   } else {
     database.set(key, {
       type,
-      path: Path.relative(Path.join(__dirname, "test262", "test"), path),
+      specifier: Path.relative(home, path),
       abrupt,
       data
     });
@@ -78,7 +95,17 @@ const workers = [1, 2, 3, 4].map(() => {
 
 let counter = 0;
 
-const iterator = Gather(Path.join(__dirname, "test262", "test"));
+const gather = function * (path) {
+  if (Fs.lstatSync(path).isDirectory()) {
+    for (let filename of Fs.readdirSync(path).sort()) {
+      yield* gather(Path.join(path, filename));
+    }
+  } else if (/\.js$/.test(path) && !/annexB|intl402|_FIXTURE/.test(path)) {
+    yield path;
+  }
+};
+
+const iterator = gather(argv.target);
 
 //////////
 // Loop //
@@ -91,14 +118,14 @@ const loop = () => {
   }
   const step = iterator.next();
   if (step.done) {
-    save();
     for (let worker of workers) {
       worker.kill("SIGINT");
     }
+    return save();
   }
   counter++;
   {
-    let specifier = Path.relative(Path.join(__dirname, "test262", "test"), step.value);
+    let specifier = Path.relative(home, step.value);
     if (specifier.length > 90) {
       specifier = "..." + specifier.substring(specifier.length - 87, specifier.length)
     }
@@ -136,7 +163,8 @@ const save = () => {
   if (counter > current) {
     database.set("CURRENT", counter);
   }
-  Fs.writeFileSync(Path.join(__dirname, "database.json"), global.JSON.stringify(global.Array.from(database.entries()), null, 2), "utf8");
+  const content = global.JSON.stringify(global.Array.from(database.entries()), null, 2);
+  Fs.writeFileSync(argv.database === null ? process.stdout.fd : argv.database, content, "utf8");
 };
 
 process.on("SIGINT", () => {

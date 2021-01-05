@@ -12,8 +12,41 @@ built-ins/String/prototype/replace/S15.5.4.11_A3_T1.js
 built-ins/String/prototype/replace/S15.5.4.11_A3_T2.js
 built-ins/String/prototype/replace/S15.5.4.11_A3_T3.js
 
+
+# {
+#   let counter = 0;
+#   const sample = new BigInt64Array(2);
+#   print(sample.every((x) => {
+#     counter || $262.detachArrayBuffer(sample.buffer);
+#     counter++;
+#     return true;
+#   }));
+#   print(counter, 2);
+# }
+built-ins/TypedArray/prototype/every/BigInt/callbackfn-detachbuffer.js
+built-ins/TypedArray/prototype/every/callbackfn-detachbuffer.js
+built-ins/TypedArray/prototype/filter/BigInt/callbackfn-detachbuffer.js
+built-ins/TypedArray/prototype/findIndex/BigInt/predicate-may-detach-buffer.js
+built-ins/TypedArray/prototype/forEach/BigInt/callbackfn-detachbuffer.js
+built-ins/TypedArray/prototype/forEach/callbackfn-detachbuffer.js
+built-ins/TypedArray/prototype/reduce/BigInt/callbackfn-detachbuffer.js
+built-ins/TypedArray/prototype/reduce/callbackfn-detachbuffer.js
+built-ins/TypedArray/prototype/reduceRight/BigInt/callbackfn-detachbuffer.js
+built-ins/TypedArray/prototype/reduceRight/callbackfn-detachbuffer.js
+built-ins/TypedArray/prototype/some/BigInt/callbackfn-detachbuffer.js
+built-ins/TypedArray/prototype/some/callbackfn-detachbuffer.js
+built-ins/TypedArrayConstructors/internals/DefineOwnProperty/BigInt/detached-buffer.js
+built-ins/TypedArrayConstructors/internals/DefineOwnProperty/detached-buffer.js
+
 # Slow AF
 built-ins/Function/prototype/toString/built-in-function-object.js
 built-ins/RegExp/CharacterClassEscapes/*.js
 built-ins/RegExp/character-class-escape-non-whitespace.js
 built-ins/RegExp/property-escapes/generated/*.js
+built-ins/decodeURI/*.js
+built-ins/decodeURIComponent/*.js
+built-ins/encodeURI/*.js
+built-ins/encodeURIComponent/*.js
+built-ins/parseFloat/S15.1.2.3_A6.js
+built-ins/parseInt/S15.1.2.2_A8.js
+harness/nativeFunctionMatcher.js

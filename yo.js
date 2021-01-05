@@ -1,35 +1,36 @@
-// Copyright (C) 2016 André Bargull. All rights reserved.
+// Copyright (C) 2016 the V8 project authors. All rights reserved.
 // This code is governed by the BSD license found in the LICENSE file.
-
 /*---
-esid: sec-%throwtypeerror%
+esid: sec-integer-indexed-exotic-objects-getownproperty-p
 description: >
-  %ThrowTypeError% does not have an own "arguments" property.
+  Returns a descriptor object from an index property
 info: |
-  %ThrowTypeError% ( )
+  9.4.5.1 [[GetOwnProperty]] ( P )
 
-  The %ThrowTypeError% intrinsic is an anonymous built-in function
-  object that is defined once for each realm.
-
-  16.2 Forbidden Extensions
-
-    Other than as defined in this specification, ECMAScript Function
-    objects defined using syntactic constructors in strict mode code
-    must not be created with own properties named "caller" or
-    "arguments" other than those that are created by applying the
-    AddRestrictedFunctionProperties abstract operation (9.2.7) to
-    the function. [...] Built-in functions, strict mode functions
-    created using the Function constructor, generator functions
-    created using the Generator constructor, and functions created
-    using the bind method also must not be created with such own
-    properties.
+  ...
+  3. If Type(P) is String, then
+    a. Let numericIndex be ! CanonicalNumericIndexString(P).
+    b. If numericIndex is not undefined, then
+      ...
+      iii. Return a PropertyDescriptor{[[Value]]: value, [[Writable]]: true,
+      [[Enumerable]]: true, [[Configurable]]: true}.
+  ...
+includes: [testBigIntTypedArray.js]
+features: [align-detached-buffer-semantics-with-web-reality, BigInt, TypedArray]
 ---*/
+{
+  
+  const sample = new BigInt64Array([42n, 43n]);
+  const descriptor0 = Object.getOwnPropertyDescriptor(sample, "0");
+  const descriptor1 = Object.getOwnPropertyDescriptor(sample, "1");
 
-// (function () {})
+  print(descriptor0.value, 42n);
+  print(descriptor0.configurable, true);
+  print(descriptor0.enumerable, true);
+  print(descriptor0.writable, true);
 
-print(Object.getOwnPropertyDescriptor(function() {
-  "use strict";
-  return arguments;
-}(), "callee"));
-
-// print(Object.prototype.hasOwnProperty.call(ThrowTypeError, "arguments"), false);
+  print(descriptor1.value, 42n);
+  print(descriptor1.configurable, true);
+  print(descriptor1.enumerable, true);
+  print(descriptor1.writable, true);
+}
