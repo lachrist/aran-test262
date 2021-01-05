@@ -46,12 +46,25 @@ const display = (mode, kind, type) => {
 //////////////
 
 let database = new global.Map([
+  ["HOME", Path.relative(__dirname, home)],
   ["CURRENT", 0]
 ]);
 
 if (argv.database !== null) {
   try {
     database = new global.Map(global.JSON.parse(Fs.readFileSync(argv.database, "utf8")));
+    if (!database.has("CURRENT")) {
+      throw new global.Error("missing counter");
+    }
+    if (typeof database.get("CURRENT") !== "number") {
+      throw new global.Error("counter is not a number");
+    }
+    if (!database.has("HOME")) {
+      throw new global.Error(`missing home`);
+    }
+    if (database.get("HOME") !== Path.relative(__dirname, home)) {
+      throw new global.Error(`invalid home; expected ${Path.relative(__dirname, home)}, got ${database.get("HOME")}`);
+    }
   } catch (error) {
     process.stderr.write("Failed to load the database: " + error.message + "\n");
   }
@@ -64,7 +77,7 @@ const current = database.get("CURRENT");
 ///////////
 
 const handler = ({mode, kind, type, path, abrupt, data}) => {
-  const key = `${global.String(counter)}/${mode}/${kind}`;
+  const key = `${global.String(counter)}-${mode}-${kind}`;
   if (database === null) {
     return null;
   }
@@ -100,7 +113,7 @@ const gather = function * (path) {
     for (let filename of Fs.readdirSync(path).sort()) {
       yield* gather(Path.join(path, filename));
     }
-  } else if (/\.js$/.test(path) && !/annexB|intl402|_FIXTURE/.test(path)) {
+  } else if (path.endsWith(".js") && !path.includes("_FIXTURE")) {
     yield path;
   }
 };
@@ -112,6 +125,7 @@ const iterator = gather(argv.target);
 //////////
 
 const loop = () => {
+  counter++;
   process.stdout.write("\n", "utf8");
   if (database === null) {
     return null;
@@ -123,7 +137,6 @@ const loop = () => {
     }
     return save();
   }
-  counter++;
   {
     let specifier = Path.relative(home, step.value);
     if (specifier.length > 90) {
@@ -133,7 +146,7 @@ const loop = () => {
   }
   for (let {mode, test} of Parse(step.value)) {
     for (let kind of ["inclusive", "exclusive"]) {
-      const key = `${global.String(counter)}/${mode}/${kind}`;
+      const key = `${global.String(counter)}-${mode}-${kind}`;
       if ((counter < current) && !database.has(key)) {
         display(mode, kind, "CACHE");
       } else {

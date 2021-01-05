@@ -27,11 +27,11 @@ exports.aran = (kind, name) => {
     const aran = new Aran({parser});
     return {
       setup: (
-        `let eval = this.eval;${
+        `const eval = this.eval;${
           "\n"
-        }this[${global.JSON.stringify(aran.namespace)}] = ${aran.intrinsic.script}${
+        }const ${aran.namespace} = ${aran.intrinsic.script};${
           "\n"
-        }${aran.namespace}["aran.advice"] = ${advice};`
+        }${aran.namespace}["aran.advice"] = (${advice}(${aran.namespace}));`
       ),
       module: (code, specifier) => aran.weave(code, {
         output: "code",

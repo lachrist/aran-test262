@@ -1,0 +1,4906 @@
+[
+  [
+    "HOME",
+    "test262/test/language"
+  ],
+  [
+    "CURRENT",
+    268
+  ],
+  [
+    "14-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/10.6-13-a-2.js",
+      "abrupt": "engine262",
+      "data": "caller"
+    }
+  ],
+  [
+    "14-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/10.6-13-a-2.js",
+      "abrupt": "engine262",
+      "data": "caller"
+    }
+  ],
+  [
+    "15-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/10.6-13-a-3.js",
+      "abrupt": "engine262",
+      "data": "caller"
+    }
+  ],
+  [
+    "15-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/10.6-13-a-3.js",
+      "abrupt": "engine262",
+      "data": "caller"
+    }
+  ],
+  [
+    "45-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "45-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "45-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "45-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "46-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "46-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "46-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "46-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "47-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "47-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "47-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "47-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "48-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "48-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "48-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "48-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "49-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "49-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "49-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "49-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "50-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-named-func-expr-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "50-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-named-func-expr-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "50-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-named-func-expr-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "50-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-named-func-expr-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "51-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-named-func-expr-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "51-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-named-func-expr-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "51-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-named-func-expr-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "51-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-named-func-expr-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "52-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-named-func-expr-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "52-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-named-func-expr-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "52-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-named-func-expr-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "52-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-named-func-expr-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "53-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-named-func-expr-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "53-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-named-func-expr-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "53-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-named-func-expr-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "53-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-named-func-expr-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "54-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-named-func-expr-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "54-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-named-func-expr-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "54-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-named-func-expr-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "54-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/async-gen-named-func-expr-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "55-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-func-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "55-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-func-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "55-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-func-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "55-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-func-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "56-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-func-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "56-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-func-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "56-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-func-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "56-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-func-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "57-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-func-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "57-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-func-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "57-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-func-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "57-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-func-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "58-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-func-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "58-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-func-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "58-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-func-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "58-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-func-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "59-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-func-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "59-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-func-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "59-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-func-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "59-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-func-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "60-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "60-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "60-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "60-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "61-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "61-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "61-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "61-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "62-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "62-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "62-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "62-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "63-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "63-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "63-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "63-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "64-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "64-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "64-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "64-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "65-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "65-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "65-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "65-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "66-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "66-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "66-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "66-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "67-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "67-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "67-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "67-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "68-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "68-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "68-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "68-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "69-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "69-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "69-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "69-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-async-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "70-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "70-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "70-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "70-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "71-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "71-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "71-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "71-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "72-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "72-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "72-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "72-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "73-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "73-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "73-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "73-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "74-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "74-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "74-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "74-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "75-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "75-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "75-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "75-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "76-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "76-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "76-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "76-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "77-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "77-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "77-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "77-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "78-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "78-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "78-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "78-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "79-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "79-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "79-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "79-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-async-private-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "80-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "80-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "80-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "80-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "81-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "81-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "81-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "81-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "82-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "82-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "82-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "82-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "83-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "83-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "83-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "83-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "84-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "84-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "84-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "84-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "85-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "85-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "85-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "85-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "86-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "86-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "86-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "86-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "87-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "87-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "87-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "87-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "88-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "88-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "88-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "88-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "89-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "89-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "89-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "89-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-decl-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "100-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "100-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "100-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "100-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "101-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "101-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "101-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "101-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "102-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "102-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "102-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "102-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "103-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "103-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "103-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "103-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "104-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "104-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "104-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "104-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "105-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "105-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "105-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "105-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "106-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "106-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "106-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "106-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "107-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "107-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "107-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "107-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "108-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "108-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "108-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "108-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "109-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "109-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "109-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "109-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "110-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "110-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "110-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "110-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "111-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "111-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "111-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "111-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "112-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "112-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "112-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "112-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "113-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "113-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "113-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "113-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "114-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "114-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "114-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "114-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "115-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "115-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "115-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "115-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "116-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "116-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "116-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "116-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "117-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "117-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "117-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "117-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "118-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "118-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "118-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "118-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "119-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "119-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "119-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "119-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-decl-private-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "120-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-func-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "120-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-func-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "120-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-func-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "120-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-func-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "121-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-func-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "121-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-func-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "121-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-func-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "121-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-func-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "122-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-func-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "122-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-func-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "122-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-func-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "122-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-func-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "123-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-func-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "123-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-func-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "123-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-func-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "123-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-func-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "124-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-func-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "124-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-func-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "124-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-func-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "124-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-func-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "125-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "125-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "125-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "125-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "126-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "126-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "126-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "126-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "127-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "127-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "127-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "127-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "128-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "128-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "128-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "128-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "129-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "129-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "129-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "129-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "130-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "130-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "130-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "130-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "131-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "131-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "131-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "131-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "132-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "132-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "132-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "132-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "133-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "133-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "133-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "133-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "134-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "134-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "134-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "134-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-async-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "135-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "135-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "135-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "135-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "136-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "136-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "136-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "136-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "137-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "137-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "137-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "137-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "138-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "138-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "138-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "138-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "139-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "139-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "139-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "139-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "140-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "140-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "140-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "140-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "141-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "141-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "141-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "141-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "142-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "142-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "142-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "142-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "143-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "143-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "143-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "143-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "144-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "144-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "144-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "144-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-async-private-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "145-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "145-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "145-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "145-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "146-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "146-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "146-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "146-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "147-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "147-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "147-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "147-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "148-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "148-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "148-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "148-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "149-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "149-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "149-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "149-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "150-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "150-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "150-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "150-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "151-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "151-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "151-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "151-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "152-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "152-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "152-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "152-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "153-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "153-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "153-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "153-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "154-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "154-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "154-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "154-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/cls-expr-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "165-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "165-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "165-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "165-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "166-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "166-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "166-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "166-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "167-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "167-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "167-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "167-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "168-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "168-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "168-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "168-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "169-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "169-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "169-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "169-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "170-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "170-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "170-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "170-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "171-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "171-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "171-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "171-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "172-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "172-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "172-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "172-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "173-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "173-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "173-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "173-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "174-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "174-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "174-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "174-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-gen-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "175-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "175-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "175-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "175-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "176-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "176-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "176-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "176-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "177-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "177-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "177-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "177-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "178-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "178-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "178-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "178-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "179-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "179-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "179-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "179-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-methods-private"
+    }
+  ],
+  [
+    "180-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "180-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "180-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "180-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-static-args-trailing-comma-multiple.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "181-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "181-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "181-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "181-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-static-args-trailing-comma-null.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "182-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "182-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "182-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "182-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-static-args-trailing-comma-single-args.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "183-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "183-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "183-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "183-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-static-args-trailing-comma-spread-operator.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "184-normal-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "184-normal-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "184-strict-inclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "184-strict-exclusive",
+    {
+      "type": "DISABLED",
+      "specifier": "arguments-object/cls-expr-private-meth-static-args-trailing-comma-undefined.js",
+      "abrupt": "engine262",
+      "data": "class-static-methods-private"
+    }
+  ],
+  [
+    "195-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-decl-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "195-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-decl-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "195-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-decl-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "195-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-decl-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "196-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-decl-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "196-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-decl-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "196-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-decl-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "196-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-decl-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "197-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-decl-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "197-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-decl-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "197-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-decl-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "197-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-decl-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "198-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-decl-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "198-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-decl-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "198-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-decl-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "198-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-decl-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "199-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-decl-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "199-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-decl-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "199-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-decl-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "199-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-decl-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "200-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-expr-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "200-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-expr-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "200-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-expr-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "200-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-expr-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "201-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-expr-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "201-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-expr-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "201-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-expr-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "201-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-expr-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "202-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-expr-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "202-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-expr-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "202-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-expr-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "202-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-expr-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "203-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-expr-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "203-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-expr-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "203-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-expr-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "203-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-expr-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "204-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-expr-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "204-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-expr-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "204-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-expr-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "204-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-func-expr-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "205-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "205-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "205-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "205-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-meth-args-trailing-comma-multiple.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "206-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "206-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "206-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "206-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-meth-args-trailing-comma-null.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "207-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "207-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "207-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "207-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-meth-args-trailing-comma-single-args.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "208-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "208-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "208-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "208-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-meth-args-trailing-comma-spread-operator.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "209-strict-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "209-normal-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "209-strict-exclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ],
+  [
+    "209-normal-inclusive",
+    {
+      "type": "SKIP",
+      "specifier": "arguments-object/gen-meth-args-trailing-comma-undefined.js",
+      "abrupt": "empty",
+      "data": null
+    }
+  ]
+]

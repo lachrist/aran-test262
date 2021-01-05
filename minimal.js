@@ -2,30 +2,32 @@
 
 const Vm = require("vm");
 const Path = require("path");
+const Minimist = require("minimist");
 const Fs = require("fs");
 const Util = require("util");
-const Minimist = require("minimist");
 const Instrumentation = require("./instrumentation");
 const Engine262 = require(Path.join(__dirname, "node_modules", "@engine262", "engine262", "dist", "engine262.js"));
 const Test262Realm = require("./test262-realm");
 
 const argv = Minimist(process.argv.slice(2));
 
+const options = /^(?<id>[0-9]+)-(?<mode>[a-z]+)-(?<kind>[a-z]+)-(?<instrumentation>[a-z]+).js$/.exec(Path.basename(argv.target)).groups;
+
 const test = {
   path: Path.resolve(process.cwd(), argv.target),
-  source: argv.target.endsWith(".mjs") ? "module" : "script", 
+  source: options.mode === "module" ? "module" : "script", 
   content: Fs.readFileSync(argv.target, "utf8")
 };
 
-const path = Path.resolve(process.cwd(), argv.target);
+if (options.mode === "strict") {
+  test.content = `"use strict"; ${test.content}`;
+}
 
-const target = Fs.readFileSync(path, "utf8");
-
-const instrumentation = Instrumentation[argv.kind].find((instrumentation) => instrumentation.name === argv.instrumentation);
+const instrumentation = Instrumentation[options.kind].find((instrumentation) => instrumentation.name === options.instrumentation);
 
 const instrument = instrumentation.instrumenter();
 
-if (!("host" in argv) || argv.host.includes("node")) {
+if (global.Reflect.getOwnPropertyDescriptor(argv, "host") === global.undefined || argv.host.includes("node")) {
   
   console.log("node");
 
@@ -41,7 +43,7 @@ if (!("host" in argv) || argv.host.includes("node")) {
       throw new global.Error("$262.detachArrayBuffer() not implemented");
     },
     evalScript (code, specifier) {
-      if (process.argv[3] === "inclusive") {
+      if (options.kind === "inclusive") {
         code = instrument.script(code, specifier);
       }
       return Vm.runInThisContext(code, {filename:specifier});
@@ -58,14 +60,14 @@ if (!("host" in argv) || argv.host.includes("node")) {
 
   Vm.runInThisContext(instrument.setup, {filename:"setup.js"});
 
-  Vm.runInThisContext(instrument.script(target, process.argv[2]), {filename:process.argv[2]});
+  Vm.runInThisContext(instrument.script(test.content, test.path), {filename:test.path});
 
   delete global.print;
   delete global.$262;
 
 }
 
-if (!("host" in argv) || argv.host.includes("engine262")) {
+if (global.Reflect.getOwnPropertyDescriptor(argv, "host") === global.undefined || argv.host.includes("engine262")) {
   
   console.log("engine262");
 
@@ -74,7 +76,7 @@ if (!("host" in argv) || argv.host.includes("engine262")) {
   const modules = new Map();
 
   const realm = Test262Realm({
-    instrument: argv.kind === "exclusive" ? {
+    instrument: options.kind === "exclusive" ? {
       setup: instrument.setup,
       script: (code) => code,
       module: (code) => code,
@@ -86,7 +88,7 @@ if (!("host" in argv) || argv.host.includes("engine262")) {
   realm.scope(() => {
     let completion;
     if (test.source === "module") {
-      completion = realm.createSourceTextModule(test.path, instrument.module(target, test.path));
+      completion = realm.createSourceTextModule(test.path, instrument.module(test.content, test.path));
       if (!(completion instanceof Engine262.AbruptCompletion)) {
         const module = completion;
         modules.set(test.path, module);
@@ -101,7 +103,7 @@ if (!("host" in argv) || argv.host.includes("engine262")) {
         }
       }
     } else {
-      completion = realm.evaluateScript(instrument.script(target, test.path), {specifier:test.path});
+      completion = realm.evaluateScript(instrument.script(test.content, test.path), {specifier:test.path});
     }
     console.log(Engine262.inspect(completion));
   });

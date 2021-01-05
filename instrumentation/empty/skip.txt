@@ -40,6 +40,12 @@ harness/assert-notsamevalue-tostring.js
 harness/assert-samevalue-tostring.js
 harness/assert-tostring.js
 harness/isConstructor.js
+language/arguments-object/async-gen-*.js
+language/arguments-object/cls-decl-async-*.js
+language/arguments-object/cls-decl-gen-*.js
+language/arguments-object/cls-expr-async-*.js
+language/arguments-object/cls-expr-gen-*.js
+language/arguments-object/gen-*.js
 
 # TODO
 # I understand why this fails for inclusive but it also fails for exclusive...
