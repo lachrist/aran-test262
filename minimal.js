@@ -25,7 +25,30 @@ if (options.mode === "strict") {
 
 const instrumentation = Instrumentation[options.kind].find((instrumentation) => instrumentation.name === options.instrumentation);
 
-const instrument = instrumentation.instrumenter();
+let instrument = instrumentation.instrumenter();
+
+if (global.Reflect.getOwnPropertyDescriptor(argv, "dump")) {
+  let counter = 0;
+  const raw = instrument;
+  const prefix = Path.basename(argv.target, ".js");
+  const pathof = (stage) => Path.join(argv.dump, `${prefix}-${global.String(counter).padStart(4, "0")}-${stage}.js`);
+  const locate = (code, source, rest) => `// ${source} ${rest.map(global.String).join("-")} original${"\n"}${code}`;
+  const dump = (source) => (code, ...rest) => {
+    counter++;
+    Fs.writeFileSync(pathof("1"), locate(code, source, rest), "utf8");
+    debugger;
+    code = raw[source](code, ...rest);
+    Fs.writeFileSync(pathof("2"), locate(code, source, rest), "utf8");
+    return code;
+  };
+  Fs.writeFileSync(Path.join(argv.dump, "_setup_.js"), raw.setup, "utf8");
+  instrument = {
+    setup: raw.setup,
+    script: dump("script"),
+    module: dump("module"),
+    eval: dump("eval")
+  };
+}
 
 if (global.Reflect.getOwnPropertyDescriptor(argv, "host") === global.undefined || argv.host.includes("node")) {
   
@@ -59,7 +82,7 @@ if (global.Reflect.getOwnPropertyDescriptor(argv, "host") === global.undefined |
   };
 
   Vm.runInThisContext(instrument.setup, {filename:"setup.js"});
-
+  debugger;
   Vm.runInThisContext(instrument.script(test.content, test.path), {filename:test.path});
 
   delete global.print;

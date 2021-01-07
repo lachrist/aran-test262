@@ -46,6 +46,14 @@ language/arguments-object/cls-decl-gen-*.js
 language/arguments-object/cls-expr-async-*.js
 language/arguments-object/cls-expr-gen-*.js
 language/arguments-object/gen-*.js
+language/computed-property-names/class/method/constructor-can-be-generator.js
+language/computed-property-names/class/method/generator.js
+language/computed-property-names/class/method/generator.js
+language/computed-property-names/class/static/generator-constructor.js
+language/computed-property-names/class/static/generator-prototype.js
+language/computed-property-names/object/method/generator.js
+language/destructuring/binding/syntax/destructuring-array-parameters-function-arguments-length.js
+language/destructuring/binding/syntax/destructuring-object-parameters-function-arguments-length.js
 
 # TODO
 # I understand why this fails for inclusive but it also fails for exclusive...
