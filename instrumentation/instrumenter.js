@@ -21,6 +21,7 @@ const parser = {
 exports.raw = (kind, name) => require(Path.join(__dirname, name, "instrumenter.js"));
 
 exports.aran = (kind, name) => {
+  const enclave = kind === "exclusive";
   const pointcut = global.eval(Fs.readFileSync(Path.join(__dirname, name, kind, "pointcut.js"), "utf8"));
   const advice = Fs.readFileSync(Path.join(__dirname, name, kind, "advice.js"), "utf8");
   return () => {
@@ -34,16 +35,19 @@ exports.aran = (kind, name) => {
         }${aran.namespace}["aran.advice"] = (${advice}(${aran.namespace}));`
       ),
       module: (code, specifier) => aran.weave(code, {
+        enclave,
         output: "code",
         source: "module",
         pointcut
       }),
       script: (code, specifier) => aran.weave(code, {
+        enclave,
         output: "code",
         source: "script",
         pointcut
       }),
       eval: (code, location, specifier) => aran.weave(code, {
+        enclave,
         output: "code",
         source: "eval",
         serial: location,

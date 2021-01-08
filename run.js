@@ -68,25 +68,15 @@ module.exports = (test, kind, instrumenter) => {
     success: () => {
       if (asynchronous === global.undefined) {
         asynchronous = null;
-      } else {
-        asynchronous = {
-          status: Status.ASYNC_DUPLICATE,
-          data: null,
-          completion: null
-        };
       }
+      // Duplicate success is not a failure
+      // eg: language/eval-code/direct/async-func-decl-fn-body-cntns-arguments-func-decl-declare-arguments-and-assign.js
     },
     failure: (message) => {
-      if (asynchronous === global.undefined) {
+      if (asynchronous === global.undefined || asynchronous === null) {
         asynchronous = {
           status: Status.ASYNC_FAILURE,
           data: message,
-          completion: null
-        };
-      } else {
-        asynchronous = {
-          status: Status.ASYNC_DUPLICATE,
-          data: null,
           completion: null
         };
       }

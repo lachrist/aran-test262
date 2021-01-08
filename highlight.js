@@ -10,11 +10,14 @@ for (let filename of Fs.readdirSync(Path.join(__dirname, "highlight"))) {
   Fs.unlinkSync(Path.join(__dirname, "highlight", filename));
 }
 
+const skips = new global.Set();
+
 const database = new global.Map(global.JSON.parse(Fs.readFileSync(process.stdin.fd, "utf8")));
 const home = database.get("HOME");
 for (let [key, value] of database.entries()) {
   if (key !== "CURRENT" && key !== "HOME") {
     if (value.type !== "SKIP" && value.type !== "DISABLED") {
+      skips.add(Path.relative(Path.join("/", "test262", "test"), Path.join("/", home, value.specifier)));
       const path = Path.resolve(__dirname, home, value.specifier);
       console.log("");
       console.log(`key  >> ${key}`);
@@ -39,4 +42,7 @@ for (let [key, value] of database.entries()) {
   }
 }
 
-console.log("");
+for (const skip of skips) {
+  console.log(skip);
+}
+

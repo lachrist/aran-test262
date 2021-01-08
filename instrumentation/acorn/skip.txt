@@ -1,3 +1,10 @@
 # Function.prototype.toString
 built-ins/Function/prototype/toString/*.js
+
+# Escogegen is not using the directive field
+# https://github.com/estools/escodegen/issues/440
+language/directive-prologue/14.1-5-s.js
+language/directive-prologue/14.1-4-s.js
+
+# Not implemented?
 language/comments/hashbang/*.js

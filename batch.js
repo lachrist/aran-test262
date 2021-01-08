@@ -120,6 +120,16 @@ const gather = function * (path) {
 
 const iterator = gather(argv.target);
 
+{
+  let counter = 0;
+  for (const path of iterator) {
+    counter++;
+    console.log(path);
+  }
+  console.log(counter);
+  process.exit(0);
+}
+
 //////////
 // Loop //
 //////////

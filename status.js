@@ -40,6 +40,5 @@ exports.NEGATIVE_UNEXPECTED = "negative-unexpected";
 exports.ASYNC_FAILURE = "async-failure";
 exports.ASYNC_MISSING = "async-missing";
 exports.ASYNC_PRESENT = "async-present";
-exports.ASYNC_DUPLICATE = "async-duplicate";
 
 exports.PENDING_PROMISES = "pending-promises";

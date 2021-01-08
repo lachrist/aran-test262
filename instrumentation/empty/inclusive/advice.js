@@ -84,6 +84,15 @@
       writable: true,
       enumerable: false,
       configurable: true});
+  global_Reflect_setPrototypeOf(
+    (async function foo() {}).constructor,
+    new_global_Function);
+  global_Reflect_setPrototypeOf(
+    (async function * foo() {}).constructor,
+    new_global_Function);
+  global_Reflect_setPrototypeOf(
+    (function * foo() {}).constructor,
+    new_global_Function);
   return {
     __proto__: null,
     eval: (value, perform, serial) => perform(

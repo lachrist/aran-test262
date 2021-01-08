@@ -1,4 +1,5 @@
 "use strict";
+Error.stackTraceLimit = Infinity;
 
 const Vm = require("vm");
 const Path = require("path");
@@ -11,7 +12,9 @@ const Test262Realm = require("./test262-realm");
 
 const argv = Minimist(process.argv.slice(2));
 
-const options = /^(?<id>[0-9]+)-(?<mode>[a-z]+)-(?<kind>[a-z]+)-(?<instrumentation>[a-z]+).js$/.exec(Path.basename(argv.target)).groups;
+const options = global.Object.assign(/^(?<id>[0-9]+)-(?<mode>[a-z]+)-(?<kind>[a-z]+)-(?<instrumentation>[a-z]+).js$/.exec(Path.basename(argv.target)).groups, argv);
+
+console.log(options);
 
 const test = {
   path: Path.resolve(process.cwd(), argv.target),
@@ -50,9 +53,7 @@ if (global.Reflect.getOwnPropertyDescriptor(argv, "dump")) {
   };
 }
 
-if (global.Reflect.getOwnPropertyDescriptor(argv, "host") === global.undefined || argv.host.includes("node")) {
-  
-  console.log("node");
+if (argv.host === "node") {
 
   global.print = (...values) => {
     console.log(...values.map((value) => Util.inspect(value)));
@@ -85,14 +86,11 @@ if (global.Reflect.getOwnPropertyDescriptor(argv, "host") === global.undefined |
   debugger;
   Vm.runInThisContext(instrument.script(test.content, test.path), {filename:test.path});
 
-  delete global.print;
-  delete global.$262;
+  // Cannot cleanup
+  // delete global.print;
+  // delete global.$262;
 
-}
-
-if (global.Reflect.getOwnPropertyDescriptor(argv, "host") === global.undefined || argv.host.includes("engine262")) {
-  
-  console.log("engine262");
+} else if (argv.host === "engine262") {
 
   Engine262.setSurroundingAgent(new Engine262.Agent({features:[]}));
 
